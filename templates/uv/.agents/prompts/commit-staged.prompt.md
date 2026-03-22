@@ -20,19 +20,19 @@ argument-hint: Optional extras (e.g., ticket=ABC-123). To skip committing, pass 
    - Present the exact command to be run. If not executed, produce a best-effort commit message from available context and stop.
 
 2. **Compose commit message**
-   - Inspect Command 1 output and repository conventions (CONTRIBUTING.md, `.agents/`, `package.json`, `commitlint`, `.husky`, `CHANGELOG.md`, etc.).
+   - Inspect Command 1 output and repository conventions (`AGENTS.md`, `.agents/`, `pyproject.toml`, `prek.toml`, `.commitlintrc.mjs`, `.github/workflows/`, etc.).
    - Produce a commit message with:
-     - Short subject (~50 chars)
-     - Optional body (each line **must be wrapped to 72 characters or fewer**; bullets allowed)
-     - Footer (BREAKING CHANGE / Refs / Ticket), including `${input:extra}` if provided
-   - **If the commit is rejected by commitlint due to line length or other formatting, rewrap and retry until the commit passes.**
-   - Prefer tooling-enforced rules. If unsure, default to Conventional Commits. **Strictly enforce commit header and body line length (72 chars max) as required by commitlint.**
+     - Conventional-commit subject (`type(scope): summary`) that follows active commitlint rules.
+     - Optional body (wrap around 72 characters for readability unless stricter project rules apply; bullets allowed).
+     - Footer (BREAKING CHANGE / Refs / Ticket), including `${input:extra}` if provided.
+   - If the commit is rejected by commitlint due to line length or other formatting, rewrap and retry until the commit passes.
+   - Prefer tooling-enforced rules. If unsure, default to Conventional Commits.
    - Do not show the proposed commit message to the user for confirmation before creating the commit. Proceed automatically to creating the commit using best-effort defaults and available context.
 
 3. **Create the commit**
    - If `${input:commitNow}` is `no`, skip this step and only present the message.
    - Otherwise, present the exact command to create the commit from stdin and print the new SHA. **Both commands must be run in the same shell command block to ensure correct context.** Use the correct heredoc/here-string syntax for the detected shell:
-      - **PowerShell (Windows):**
+      **PowerShell (Windows):**
 
         ```powershell
         (@'
@@ -46,7 +46,7 @@ argument-hint: Optional extras (e.g., ticket=ABC-123). To skip committing, pass 
         (`@"..."@`) is used, be careful to escape backticks and`$` or switch to
         the single-quoted form.
 
-      - **Bash/zsh (Linux/macOS):**
+      **Bash/zsh (Linux/macOS):**
 
         ```bash
         (git commit --file - <<'MSG'
