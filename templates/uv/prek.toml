@@ -1,0 +1,92 @@
+# Prek native configuration: preferred as the canonical configuration for pre-commit-style hooks.
+# Pre-commit-style configuration for common checks and Python formatting.
+# Mirrors the project's conventions: enable the recommended hooks from pre-commit-hooks and use Ruff
+# for Python formatting and linting. Adjust or opt-out of any hooks as needed per team preference.
+# This file replaces `.pre-commit-config.yaml`; that file has been removed to avoid duplication.
+# Note: `prek` can read `.pre-commit-config.yaml` for compatibility, but `prek.toml` is preferred.
+
+default_install_hook_types = [
+  "commit-msg",
+  "pre-commit",
+  "pre-push",
+]
+default_stages = [
+  "pre-commit",
+]
+
+[[repos]]
+repo = "https://github.com/pre-commit/pre-commit-hooks"
+rev = "3e8a8703264a2f4a69428a0aa4dcb512790b2c8c"
+# Notes:
+# - These hooks are a recommended baseline. If a particular hook is undesired (for example, forbidding
+#   submodules in a repository that intentionally uses them), remove or configure that hook in `prek.toml`.
+# - Keep hook repositories pinned (set `rev`) to an explicit release to ensure reproducible behaviour.
+hooks = [
+  { id = "check-case-conflict" },
+  { id = "check-executables-have-shebangs" },
+  { id = "check-illegal-windows-names" },
+  { id = "check-merge-conflict" },
+  { id = "check-shebang-scripts-are-executable" },
+  { id = "check-symlinks" },
+  { id = "destroyed-symlinks" },
+  { id = "detect-private-key" },
+  { id = "end-of-file-fixer" },
+  { id = "fix-byte-order-marker" },
+  { id = "name-tests-test", args = ["--pytest-test-first"] },
+  # Preserve markdown hard line breaks (common in docs)
+  { id = "trailing-whitespace", args = ["--markdown-linebreak-ext=md,mdoc,mdown,mdx,mkd,mkdn,markdown,rmd"] },
+]
+
+# Markdown linting using rumdl (high-performance Rust linter). These hooks
+# use the official pre-commit bridge which installs rumdl into an isolated
+# environment automatically. Keep `.markdownlint.jsonc` for compatibility;
+# rumdl auto-discovers and can import markdownlint configs via `rumdl import`.
+[[repos]]
+repo = "https://github.com/rvben/rumdl-pre-commit"
+rev = "59d5dafbf6b16f065b4c86cbbff836f5c4a75a71"
+hooks = [
+  { id = "rumdl-fmt" },
+]
+
+[[repos]]
+repo = "https://github.com/RobertCraigie/pyright-python"
+rev = "81b795a41ddcc3c77218d8c8e406983e39852285"
+hooks = [
+  { id = "pyright" },
+]
+
+[[repos]]
+repo = "https://github.com/astral-sh/ruff-pre-commit"
+rev = "0470f7c8a653e950f7cc5a653204ceb3fde4c02a"
+hooks = [
+  { id = "ruff-check", args = ["--fix"] },
+  { id = "ruff-format" },
+]
+
+# Commit message linting using commitlint (Node.js). This uses
+# the commitlint-pre-commit-hook bridge so it runs as a commit-msg hook.
+# Note: Node.js must be available on developer machines to run this hook.
+[[repos]]
+repo = "https://github.com/alessandrojcm/commitlint-pre-commit-hook"
+rev = "1f6454da22d006d5bb0d2e65c96c43c23c8a534f"
+hooks = [
+  {
+    id = "commitlint",
+    stages = ["commit-msg"],
+    additional_dependencies = ["@commitlint/config-conventional"],
+  },
+]
+
+[[repos]]
+repo = "local"
+hooks = [
+  {
+    id = "pytest-push",
+    name = "Run Pytest on Push",
+    entry = "uv run --locked pytest",
+    language = "system",
+    pass_filenames = false, # Run all tests, not just those with changed files
+    always_run = true, # Ensure tests run on every push, even if no files changed
+    stages = ["pre-push"], # Specify pre-push stage
+  }
+]

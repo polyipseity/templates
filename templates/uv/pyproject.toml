@@ -1,0 +1,93 @@
+[build-system]
+requires = ["uv_build"]
+build-backend = "uv_build"
+
+[project]
+name = "EDITME-b77f288d-dbfe-4dac-9645-626917ddf677"
+version = "0.0.0"
+requires-python = ">=3.12.0"
+description = "EDITME"
+license = {file = "LICENSE.txt"}
+readme = "README.md"
+dependencies = [
+  "aiohttp>=3.9.0",
+  "anyio>=3.6.0",
+  "asyncer>=0.0.17",
+  "asyncstdlib>=3.10.0",
+  "uvloop>=0.22.0; platform_system != 'Windows'",
+  "winloop>=0.5.0; platform_system == 'Windows'",
+]
+
+[project.scripts]
+
+[project.urls]
+repository = "EDITME"
+
+[dependency-groups]
+dev = [
+  "hypothesis>=6.151.0",
+  "prek>=0.3.0",
+  "pyright>=1.1.408",
+  "pytest>=9.0.0",
+  "pytest-cov>=7.0.0",
+  "pytest-xdist>=3.8.0",
+  "ruff>=0.15.0",
+  "rumdl>=0.1.20",
+]
+
+[tool.pyright]
+exclude = [
+  "**/node_modules",
+  "**/__pycache__",
+  "**/.*",
+  ".venv",
+  # self
+]
+typeCheckingMode = "strict"
+venv = ".venv"
+venvPath = "."
+pythonPlatform = "All"
+pythonVersion = "3.12"
+deprecateTypingAliases = true
+enableReachabilityAnalysis = true
+strictDictionaryInference = true
+strictListInference = true
+strictSetInference = true
+
+[[tool.pyright.executionEnvironments]]
+extraPaths = ["src", "."]
+reportPrivateUsage = "none"
+root = "tests"
+
+[[tool.pyright.executionEnvironments]]
+root = "src"
+
+[[tool.pyright.executionEnvironments]]
+root = "."
+
+[tool.pytest.ini_options]
+addopts = ["--cov=./", "--cov-report=term-missing", "--dist=loadscope", "-n=auto", "--strict-markers"]
+testpaths = [
+  ".agents/skills/**/tests_*",
+  "tests",
+]
+python_files = "test_*.py"
+
+[tool.ruff]
+line-length = 88
+extend-exclude = [
+  # self
+]
+
+[tool.ruff.lint]
+# Enable Pylint-derived rule that disallows imports outside module top-level
+# (import-outside-top-level / PLC0415). Ruff 0.12.0+ provides this rule.
+extend-select = ["I", "PLC0415"]
+
+[tool.uv]
+required-version = ">=0.9.0,<0.11.0"
+
+[tool.uv.build-backend]
+# EDITME: Do not include any packages in the build, as this project is only a collection of tools and scripts.
+module-name = []
+source-include = ["py.typed"]
