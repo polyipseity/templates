@@ -2,5 +2,8 @@
 target-dir = "target"
 
 [alias]
-fmt-check = "fmt --all -- --check"
-lint = "clippy --workspace --all-targets --all-features -- -D warnings"
+bin = ["run", "--package", "cargo-bin", "--"]
+build-all = ["build", "--workspace", "--all-targets", "--all-features"]
+clippy-all = ["clippy", "--workspace", "--all-targets", "--all-features", "--", "-D", "warnings"]
+fmt-check = ["fmt", "--all", "--", "--check"]
+test-all = ["test", "--workspace", "--all-targets", "--all-features"]

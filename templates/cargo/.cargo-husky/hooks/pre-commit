@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+set -e
+
+echo '+cargo check'
+cargo check --workspace --all-targets --all-features
+
+echo '+cargo clippy'
+cargo clippy --workspace --all-targets --all-features -- -D warnings
+
+echo '+cargo fmt'
+cargo fmt --all

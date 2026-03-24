@@ -8,3 +8,14 @@ license-file = "LICENSE.txt"
 publish = false  # PLACEHOLDER
 
 [dependencies]
+
+[dev-dependencies]
+cargo-husky = { version = "1", default-features = false, features = ["user-hooks"] }
+
+[package.metadata.bin]
+# <https://github.com/cargo-bins/cargo-binstall/issues/2476>
+# cargo-binstall = { version = "1.17.8" }
+commitlint-rs = { bins = ["commitlint"], version = "0.2.4" }
+
+[workspace]
+members = ["scripts/cargo-bin"]

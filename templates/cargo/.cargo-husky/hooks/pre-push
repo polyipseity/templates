@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+set -e
+
+echo '+cargo test'
+cargo test --workspace --all-targets --all-features
