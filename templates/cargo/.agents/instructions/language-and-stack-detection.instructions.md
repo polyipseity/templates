@@ -3,6 +3,7 @@ description: "Use when creating or updating AGENTS.md or instruction files and y
 name: "Language and Stack Detection"
 applyTo: "AGENTS.md, .agents/instructions/**/*.md"
 ---
+
 # Language and Stack Detection
 
 ## Goal

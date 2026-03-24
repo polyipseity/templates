@@ -3,6 +3,7 @@ description: "Use when editing markdown docs, AGENTS.md, prompt files, or agent 
 name: "Markdown and Customization Authoring"
 applyTo: "AGENTS.md, README.md, .agents/**/*.md, .opencode/**/*.md, .github/**/*.md"
 ---
+
 # Markdown and Customization Authoring
 
 ## Scope and intent

@@ -3,6 +3,7 @@ description: "Use when adding or editing files under scripts/. Covers script pla
 name: "Scripts and Executable Permissions"
 applyTo: "scripts/**"
 ---
+
 # Scripts and Executable Permissions
 
 ## Scope and template state

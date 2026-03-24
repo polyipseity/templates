@@ -3,6 +3,7 @@ description: "Use when creating or updating instructions for repository tooling,
 name: "Tooling and Validation Detection"
 applyTo: "AGENTS.md, .agents/instructions/**/*.md, opencode.json, .vscode/settings.json, .github/workflows/**/*.yml, .github/workflows/**/*.yaml, .github/dependabot.yml, .editorconfig, .gitattributes"
 ---
+
 # Tooling and Validation Detection
 
 ## Discovery before prescription

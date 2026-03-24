@@ -3,6 +3,7 @@ description: "Use when editing Rust source, Cargo config, or Rust CI validation 
 name: "Rust Workflow Guidance"
 applyTo: "**/*.rs, Cargo.toml, Cargo.lock, rust-toolchain.toml, rustfmt.toml, clippy.toml, .cargo/**/*.toml, .github/workflows/**/*.yml, .github/workflows/**/*.yaml"
 ---
+
 # Rust Workflow Guidance
 
 ## Scope
