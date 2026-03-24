@@ -7,6 +7,8 @@ description = "EDITME"
 license-file = "LICENSE.txt"
 publish = false  # EDITME
 
+build = "scripts/build.rs"
+
 [dependencies]
 
 [dev-dependencies]
