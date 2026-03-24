@@ -11,7 +11,7 @@ build = "scripts/build.rs"
 [dependencies]
 
 [dev-dependencies]
-cargo-husky = { version = "1", default-features = false, features = ["user-hooks"] }
+cargo-husky = { version = "1.5.0", default-features = false, features = ["user-hooks"] }
 
 [package.metadata.bin]
 # <https://github.com/cargo-bins/cargo-binstall/issues/2476>
