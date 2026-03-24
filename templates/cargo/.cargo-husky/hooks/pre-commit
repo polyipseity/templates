@@ -1,6 +1,9 @@
 #!/usr/bin/env sh
 set -e
 
+echo '+cargo bin rumdl'
+cargo bin rumdl fmt
+
 echo '+cargo check'
 cargo check --workspace --all-targets --all-features
 

@@ -51,6 +51,7 @@ jobs:
 
       - name: Build project
         run: |
+          cargo bin rumdl check
           cargo clippy-all
           cargo fmt-check
           cargo build-all

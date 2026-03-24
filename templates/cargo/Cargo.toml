@@ -6,7 +6,6 @@ rust-version = "1.94.0"
 description = "EDITME"
 license-file = "LICENSE.txt"
 publish = false  # EDITME
-
 build = "scripts/build.rs"
 
 [dependencies]
@@ -18,6 +17,7 @@ cargo-husky = { version = "1", default-features = false, features = ["user-hooks
 # <https://github.com/cargo-bins/cargo-binstall/issues/2476>
 # cargo-binstall = { version = "1.17.8" }
 commitlint-rs = { bins = ["commitlint"], version = "0.2.4" }
+rumdl = { version = "0.1.59" }
 
 [workspace]
 members = ["scripts/cargo-bin"]
