@@ -1,11 +1,11 @@
 [package]
-name = "PLACEHOLDER"
+name = "EDITME"
 version = "0.0.0"
 edition = "2024"
 rust-version = "1.94.0"
-description = "PLACEHOLDER"
+description = "EDITME"
 license-file = "LICENSE.txt"
-publish = false  # PLACEHOLDER
+publish = false  # EDITME
 
 [dependencies]
 
