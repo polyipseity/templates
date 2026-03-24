@@ -1,8 +1,8 @@
 #!/usr/bin/env sh
 set -e
 
-echo '+cargo bin rumdl'
-cargo bin rumdl fmt
+echo '+cargo bin rumdl check'
+cargo bin rumdl check
 
 echo '+cargo check'
 cargo check --workspace --all-targets --all-features
@@ -11,4 +11,4 @@ echo '+cargo clippy'
 cargo clippy --workspace --all-targets --all-features -- -D warnings
 
 echo '+cargo fmt'
-cargo fmt --all
+cargo fmt --all -- --check
