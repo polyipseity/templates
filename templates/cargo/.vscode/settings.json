@@ -6,8 +6,10 @@
   "chat.tools.terminal.autoApprove": {
     "/^-?\\d+\\.\\.-?\\d+$/": true,
     "/^cargo\\s+(?:build|build-all|check|clean|clippy|clippy-all|doc|fmt|fmt-check|run|test|test-all)(?:\\s+(?:--?[\\w-]+(?:=[^\\s]+)?|[^\\s]+))*$/": true,
+    "ConvertFrom-Json": true,
     "ForEach-Object": true,
     "Get-Item": true,
+    "Group-Object": true,
     "Out-Null": true,
     "Pop-Location": true,
     "Push-Location": true,
