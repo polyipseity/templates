@@ -2,16 +2,21 @@
   "chat.tools.terminal.autoApprove": {
     "/^-?\\d+\\.\\.-?\\d+$/": true,
     "ConvertFrom-Json": true,
+    "ConvertTo-Json": true,
     "ForEach-Object": true,
+    "Get-Command": true,
     "Get-Item": true,
+    "Get-Member": true,
     "Group-Object": true,
     "Out-Null": true,
     "Pop-Location": true,
     "Push-Location": true,
+    "Tee-Object": true,
     "Test-Path": true,
     "git rev-parse": true,
     "i": true,
     "i++": true,
+    "rustfmt": true,
     "type": true
   },
   "files.associations": {
