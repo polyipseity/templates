@@ -5,7 +5,7 @@
   },
   "chat.tools.terminal.autoApprove": {
     "/^-?\\d+\\.\\.-?\\d+$/": true,
-    "/^cargo\\s+(?:build|build-all|check|clean|clippy|clippy-all|doc|fmt|fmt-check|run|test|test-all)(?:\\s+(?:--?[\\w-]+(?:=[^\\s]+)?|[^\\s]+))*$/": true,
+    "/^cargo\\s+(?:build|build-all|build-pkg|check|clean|clippy|clippy-all|clippy-pkg|doc|fmt|fmt-check|run|test|test-all|test-pkg)(?:\\s+(?:--?[\\w-]+(?:=[^\\s]+)?|[^\\s]+))*$/": true,
     "ConvertFrom-Json": true,
     "ConvertTo-Json": true,
     "ForEach-Object": true,
