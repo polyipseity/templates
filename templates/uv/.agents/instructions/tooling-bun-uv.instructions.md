@@ -8,7 +8,7 @@ applyTo: "pyproject.toml, prek.toml, opencode.json, .commitlintrc.mjs, .github/w
 
 - Preserve the UV-first workflow for install/test/build and local hooks.
 - Keep version constraints intentional:
-  - `requires-python = ">=3.12.0"`
+  - `requires-python = ">=3.14.0"`
   - `[tool.uv].required-version = ">=0.9.0,<0.11.0"`
 - Keep CI commands in `.github/workflows/ci.yml` aligned with repository policy:
   - `uv sync --locked --all-extras --dev`

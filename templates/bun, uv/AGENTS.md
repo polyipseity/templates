@@ -35,7 +35,7 @@
 
 ## Conventions
 
-- Python version is `3.12` with strict type checking (`ty` in
+- Python version is `3.14` with strict type checking (`ty` in
   `pyproject.toml`).
 - Every Python module in scoped paths must define module-level `__all__` as a
   tuple of string literals (enforced by `tests/test_module_exports.py`).

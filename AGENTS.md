@@ -34,7 +34,7 @@
 - Follow formatting and line-ending rules from `.editorconfig`,
   `.gitattributes`, `.markdownlint.jsonc`, `.agents/.markdownlint.jsonc`, and
   `pyproject.toml`.
-- Python targets `3.12`, uses strict Ty settings, and uses Ruff with an
+- Python targets `3.14`, uses strict Ty settings, and uses Ruff with an
   88-character line length.
 - Preserve file-specific line endings: Markdown and shell files use LF;
   PowerShell and batch files use CRLF.

@@ -5,7 +5,7 @@ build-backend = "uv_build"
 [project]
 name = "EDITME-b77f288d-dbfe-4dac-9645-626917ddf677"
 version = "0.0.0"
-requires-python = ">=3.12.0"
+requires-python = ">=3.14.0"
 description = "EDITME"
 license = {file = "LICENSE.txt"}
 readme = "README.md"

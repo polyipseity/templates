@@ -15,7 +15,7 @@ applyTo: "**/*.py"
   - top-level assignments/constants via an immediately preceding
     string-literal expression
 - Use complete type annotations compatible with Ty strict mode
-  (`python-version = "3.12"`).
+  (`python-version = "3.14"`).
 - Prefer top-level imports; avoid import-outside-top-level patterns unless
   there is a strong reason (`PLC0415` is enabled in Ruff).
 - When validating or fixing Python quality, prefer:
