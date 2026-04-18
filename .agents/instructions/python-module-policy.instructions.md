@@ -17,5 +17,5 @@ applyTo: "tests/**/*.py,src/**/*.py,scripts/**/*.py,.agents/skills/**/*.py"
 - Docstring every nested function and nested class.
 - Put a string-literal docstring immediately above each top-level assignment.
 - Exported functions and classes named in `__all__` must also have non-empty docstrings.
-- Keep files friendly to Python 3.12, strict Pyright, and Ruff.
+- Keep files friendly to Python 3.12, strict Ty, and Ruff.
 - Update the tests with any policy change.

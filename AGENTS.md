@@ -17,7 +17,7 @@
 ## Build and Test
 
 - Use the root scripts in `package.json` as the source of truth:
-  - `bun run check` — runs markdownlint, Prettier checks, Ruff, and Pyright
+  - `bun run check` — runs markdownlint, Prettier checks, Ruff, and Ty
   - `bun run test` — runs `uv run --locked pytest`
   - `bun run build` — runs `check` before `build:force`
   - `bun run format` — fixes Markdown, Prettier-supported files, and Python
@@ -34,7 +34,7 @@
 - Follow formatting and line-ending rules from `.editorconfig`,
   `.gitattributes`, `.markdownlint.jsonc`, `.agents/.markdownlint.jsonc`, and
   `pyproject.toml`.
-- Python targets `3.12`, uses strict Pyright settings, and uses Ruff with an
+- Python targets `3.12`, uses strict Ty settings, and uses Ruff with an
   88-character line length.
 - Preserve file-specific line endings: Markdown and shell files use LF;
   PowerShell and batch files use CRLF.
@@ -56,7 +56,7 @@
 - If you add helper scripts under `scripts/`, make sure git tracks executable
   ones with the correct mode; see `tests/test_git_executable.py`.
 - Do not assume content under `templates/*/**` is type-checked by the root
-  Pyright configuration; those paths are excluded in `pyproject.toml`.
+  Ty configuration; those paths are excluded in `pyproject.toml`.
 - For commit-related automation, follow Conventional Commits and the existing
   commitlint + Husky setup; see `.commitlintrc.mjs`, `.husky/commit-msg`, and
   `.agents/prompts/commit-staged.prompt.md`.

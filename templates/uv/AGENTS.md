@@ -30,14 +30,14 @@
   - `uv run --locked rumdl check`
   - `uv run --locked ruff check`
   - `uv run --locked ruff format --check`
-  - `uv run --locked pyright`
+  - `uv run --locked ty`
   - `uv build`
 - Prefer locked Python tool execution through UV (for example,
   `uv run --locked ruff check`, `uv run --locked pytest`).
 
 ## Conventions
 
-- Python version is `3.12` with strict type checking (`pyright` in
+- Python version is `3.12` with strict type checking (`ty` in
   `pyproject.toml`).
 - Every Python module in scoped paths must define module-level `__all__` as a
   tuple of string literals (enforced by `tests/test_module_exports.py`).
@@ -50,7 +50,7 @@
 
 ## Key References
 
-- `pyproject.toml` — Python dependencies, Ruff, Pyright, pytest, UV constraints
+- `pyproject.toml` — Python dependencies, Ruff, Ty, pytest, UV constraints
 - `prek.toml` — pre-commit and pre-push hook policy
 - `.commitlintrc.mjs` — commit message linting policy
 - `.github/workflows/ci.yml` — canonical CI install/test/build commands

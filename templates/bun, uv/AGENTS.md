@@ -35,7 +35,7 @@
 
 ## Conventions
 
-- Python version is `3.12` with strict type checking (`pyright` in
+- Python version is `3.12` with strict type checking (`ty` in
   `pyproject.toml`).
 - Every Python module in scoped paths must define module-level `__all__` as a
   tuple of string literals (enforced by `tests/test_module_exports.py`).
@@ -49,7 +49,7 @@
 ## Key References
 
 - `package.json` — canonical Bun scripts (`check`, `format`, `test`, `build`)
-- `pyproject.toml` — Python dependencies, Ruff, Pyright, pytest, UV constraints
+- `pyproject.toml` — Python dependencies, Ruff, Ty, pytest, UV constraints
 - `.lintstagedrc.mjs` — staged-file command forwarding conventions
 - `tests/test_module_exports.py` — `__all__` policy and ordering checks
 - `tests/test_docstrings.py` — docstring policy for modules/definitions/variables

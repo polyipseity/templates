@@ -11,7 +11,7 @@ applyTo: "tests/**/*.py,.github/workflows/**/*.yml,.github/workflows/**/*.yaml,p
 - CI installs with `bun install --frozen-lockfile --ignore-scripts`.
 - CI also installs with `uv sync --locked --all-extras --dev`.
 - Prefer the same locked flags locally.
-- `bun run check` validates Markdown, Prettier files, Ruff, and Pyright.
+- `bun run check` validates Markdown, Prettier files, Ruff, and Ty.
 - `bun run test` runs `uv run --locked pytest`.
 - `bun run build` depends on `check` first.
 - Pytest discovers `tests/` and `.agents/skills/**/tests_*`.

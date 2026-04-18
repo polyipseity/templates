@@ -14,8 +14,8 @@ applyTo: "src/**/*.py, tests/**/*.py, scripts/**/*.py, .agents/skills/**/*.py"
   - nested functions and methods
   - top-level assignments/constants via an immediately preceding
     string-literal expression
-- Use complete type annotations compatible with Pyright strict mode
-  (`pythonVersion = 3.12`).
+- Use complete type annotations compatible with Ty strict mode
+  (`python-version = "3.12"`).
 - Prefer top-level imports; avoid import-outside-top-level patterns unless
   there is a strong reason (`PLC0415` is enabled in Ruff).
 - When validating or fixing Python quality, prefer:

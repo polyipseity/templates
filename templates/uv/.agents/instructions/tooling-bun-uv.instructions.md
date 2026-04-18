@@ -16,7 +16,7 @@ applyTo: "pyproject.toml, prek.toml, opencode.json, .commitlintrc.mjs, .github/w
   - `uv run --locked rumdl check`
   - `uv run --locked ruff check`
   - `uv run --locked ruff format --check`
-  - `uv run --locked pyright`
+  - `uv run --locked ty`
   - `uv build`
 - Prefer `uv run --locked ...` for Python lint/format/test commands.
 - Keep commit-message conventions compatible with `.commitlintrc.mjs`
