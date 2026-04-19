@@ -1,14 +1,19 @@
 {
   "recommendations": [
+    "astral-sh.ty",
+    "charliermarsh.ruff",
+    "christian-kohler.npm-intellisense",
     "christian-kohler.path-intellisense",
+    "dbaeumer.vscode-eslint",
     "DavidAnson.vscode-markdownlint",
     "EditorConfig.EditorConfig",
     "esbenp.prettier-vscode",
     "GitHub.copilot-chat",
+    "ms-python.debugpy",
+    "ms-python.python",
+    "ms-toolsai.jupyter",
     "redhat.vscode-yaml",
-    "rust-lang.rust-analyzer",
     "streetsidesoftware.code-spell-checker",
-    "tamasfe.even-better-toml",
-    "vadimcn.vscode-lldb"
+    "tamasfe.even-better-toml"
   ]
 }
