@@ -7,6 +7,7 @@
     "GitHub.copilot-chat",
     "redhat.vscode-yaml",
     "rust-lang.rust-analyzer",
+    "sst-dev.opencode-v2",
     "streetsidesoftware.code-spell-checker",
     "tamasfe.even-better-toml",
     "vadimcn.vscode-lldb"
