@@ -50,7 +50,5 @@
   },
   "markdown.validate.enabled": true,
   "python-envs.defaultEnvManager": "ms-python.python:venv",
-  "python-envs.pythonProjects": [],
-  "rust-analyzer.check.allTargets": true,
-  "rust-analyzer.check.command": "clippy"
+  "python-envs.pythonProjects": []
 }
