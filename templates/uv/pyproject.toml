@@ -20,7 +20,7 @@ dependencies = [
 [project.scripts]
 
 [project.urls]
-repository = "EDITME"
+repository = "https://example.com"  # EDITME
 
 [dependency-groups]
 dev = [
