@@ -240,7 +240,7 @@ wheels = [
 [[package]]
 name = "templates-1485298c-3492-487b-b86a-c0f769cf39b3"
 version = "0.0.0"
-source = { editable = "." }
+source = { virtual = "." }
 dependencies = [
     { name = "anyio" },
     { name = "asyncer" },
