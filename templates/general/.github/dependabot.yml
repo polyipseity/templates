@@ -21,6 +21,8 @@ updates:
         applies-to: "security-updates"
         patterns:
           - "*"
+    cooldown:
+      default-days: 5
 
   # Git submodules (gitmodules)
   - package-ecosystem: "gitsubmodule"
@@ -39,3 +41,5 @@ updates:
         applies-to: "security-updates"
         patterns:
           - "*"
+    cooldown:
+      default-days: 5

@@ -21,6 +21,8 @@ updates:
         applies-to: "security-updates"
         patterns:
           - "*"
+    cooldown:
+      default-days: 5
 
   # GitHub Actions (workflow dependencies)
   - package-ecosystem: "github-actions"
@@ -39,6 +41,8 @@ updates:
         applies-to: "security-updates"
         patterns:
           - "*"
+    cooldown:
+      default-days: 5
 
   # Git submodules (gitmodules)
   - package-ecosystem: "gitsubmodule"
@@ -57,3 +61,5 @@ updates:
         applies-to: "security-updates"
         patterns:
           - "*"
+    cooldown:
+      default-days: 5
