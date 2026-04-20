@@ -7,7 +7,7 @@ name = "EDITME-b77f288d-dbfe-4dac-9645-626917ddf677"
 version = "0.0.0"
 requires-python = ">=3.14.0"
 description = "EDITME"
-license = {file = "LICENSE.txt"}
+license = { file = "LICENSE.txt" }
 readme = "README.md"
 dependencies = [
   "anyio>=4.12.0",
@@ -35,11 +35,14 @@ dev = [
 ]
 
 [tool.pytest.ini_options]
-addopts = ["--cov=./", "--cov-report=term-missing", "--dist=loadscope", "-n=auto", "--strict-markers"]
-testpaths = [
-  ".agents/skills/**/tests_*",
-  "tests",
+addopts = [
+  "--cov=./",
+  "--cov-report=term-missing",
+  "--dist=loadscope",
+  "-n=auto",
+  "--strict-markers",
 ]
+testpaths = [".agents/skills/**/tests_*", "tests"]
 python_files = "test_*.py"
 
 [tool.ruff]
@@ -69,6 +72,7 @@ exclude = [
 ]
 
 [tool.uv]
+package = true                       # EDITME
 required-version = ">=0.9.0,<0.11.0"
 
 [tool.uv.build-backend]
