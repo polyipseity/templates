@@ -17,6 +17,12 @@ updates:
       github-actions:
         patterns:
           - "*"
+      github-actions-security:
+        applies-to: "security-updates"
+        patterns:
+          - "*"
+    cooldown:
+      default-days: 5
 
   # Git submodules (gitmodules)
   - package-ecosystem: "gitsubmodule"
@@ -31,6 +37,12 @@ updates:
       gitsubmodule:
         patterns:
           - "*"
+      gitsubmodule-security:
+        applies-to: "security-updates"
+        patterns:
+          - "*"
+    cooldown:
+      default-days: 5
 
   # Python (pyproject.toml)
   - package-ecosystem: "uv"
@@ -45,6 +57,12 @@ updates:
       uv:
         patterns:
           - "*"
+      uv-security:
+        applies-to: "security-updates"
+        patterns:
+          - "*"
+    cooldown:
+      default-days: 5
     exclude-paths:
       # wtf: <https://github.com/dependabot/dependabot-core/issues/13960>
       - "LICENSE.txt"
