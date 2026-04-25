@@ -23,7 +23,7 @@
 
 - Install dependencies with Bun and UV:
   - `bun install`
-  - `uv sync --all-extras --dev`
+  - `uv sync`
 - Standard project checks:
   - `bun run check`
   - `bun run test`

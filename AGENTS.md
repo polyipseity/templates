@@ -23,7 +23,7 @@
   - `bun run format` — fixes Markdown, Prettier-supported files, and Python
 - For fresh setup, CI installs dependencies with:
   - `bun install --frozen-lockfile --ignore-scripts`
-  - `uv sync --locked --all-extras --dev`
+  - `uv sync --locked`
 - Prefer locked Python CLI runs (`uv run --locked ...`) to match CI and
   lint-staged behavior.
 - When a change affects validation or release automation, check both

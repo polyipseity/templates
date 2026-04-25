@@ -11,7 +11,7 @@ applyTo: "pyproject.toml, prek.toml, opencode.json, .commitlintrc.mjs, .github/w
   - `requires-python = ">=3.14.0"`
   - `[tool.uv].required-version = ">=0.9.0,<0.11.0"`
 - Keep CI commands in `.github/workflows/ci.yml` aligned with repository policy:
-  - `uv sync --locked --all-extras --dev`
+  - `uv sync --locked`
   - `uv run --locked pytest`
   - `uv run --locked rumdl check`
   - `uv run --locked ruff check`

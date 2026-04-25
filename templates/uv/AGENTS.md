@@ -24,7 +24,7 @@
 ## Build and Test
 
 - Install dependencies with UV:
-  - `uv sync --locked --all-extras --dev`
+  - `uv sync --locked`
 - Standard project checks (as used in CI):
   - `uv run --locked pytest`
   - `uv run --locked rumdl check`

@@ -30,7 +30,8 @@
 - Formatting:
   - `bun run format`
 - When Python tooling is enabled, prefer locked UV execution (for example,
-  `uv sync --all-extras --dev`, `uv run --locked ruff check`,
+  `uv sync --locked`,
+  `uv run --locked ruff check`,
   `uv run --locked pytest`).
 
 ## Conventions

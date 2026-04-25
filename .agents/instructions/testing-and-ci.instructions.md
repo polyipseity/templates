@@ -9,7 +9,7 @@ applyTo: "tests/**/*.py,.github/workflows/**/*.yml,.github/workflows/**/*.yaml,p
 - `package.json` is the source of truth for top-level repo commands.
 - Keep `AGENTS.md`, workflows, and prompts aligned with those scripts.
 - CI installs with `bun install --frozen-lockfile --ignore-scripts`.
-- CI also installs with `uv sync --locked --all-extras --dev`.
+- CI also installs with `uv sync --locked`.
 - Prefer the same locked flags locally.
 - `bun run check` validates Markdown, Prettier files, Ruff, and Ty.
 - `bun run test` runs `uv run --locked pytest`.
