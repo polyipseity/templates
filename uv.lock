@@ -245,6 +245,10 @@ dependencies = [
     { name = "anyio" },
     { name = "asyncer" },
     { name = "asyncstdlib" },
+]
+
+[package.optional-dependencies]
+uvloop = [
     { name = "uvloop", marker = "sys_platform != 'win32'" },
     { name = "winloop", marker = "sys_platform == 'win32'" },
 ]
@@ -258,15 +262,19 @@ dev = [
     { name = "ruff" },
     { name = "ty" },
 ]
+uvloop = [
+    { name = "templates-1485298c-3492-487b-b86a-c0f769cf39b3", extra = ["uvloop"] },
+]
 
 [package.metadata]
 requires-dist = [
     { name = "anyio", specifier = ">=4.12.0" },
     { name = "asyncer", specifier = ">=0.0.17" },
     { name = "asyncstdlib", specifier = ">=3.12.0" },
-    { name = "uvloop", marker = "sys_platform != 'win32'", specifier = ">=0.22.0" },
-    { name = "winloop", marker = "sys_platform == 'win32'", specifier = ">=0.5.0" },
+    { name = "uvloop", marker = "sys_platform != 'win32' and extra == 'uvloop'", specifier = ">=0.22.0" },
+    { name = "winloop", marker = "sys_platform == 'win32' and extra == 'uvloop'", specifier = ">=0.5.0" },
 ]
+provides-extras = ["uvloop"]
 
 [package.metadata.requires-dev]
 dev = [
@@ -277,6 +285,7 @@ dev = [
     { name = "ruff", specifier = ">=0.15.0" },
     { name = "ty", specifier = ">=0.0.26" },
 ]
+uvloop = [{ name = "templates-1485298c-3492-487b-b86a-c0f769cf39b3", extras = ["uvloop"] }]
 
 [[package]]
 name = "ty"

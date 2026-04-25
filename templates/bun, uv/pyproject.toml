@@ -9,10 +9,10 @@ requires-python = ">=3.14.0"
 description = "EDITME"
 license = { file = "LICENSE.txt" }
 readme = "README.md"
-dependencies = [
-  "anyio>=4.12.0",
-  "asyncer>=0.0.17",
-  "asyncstdlib>=3.12.0",
+dependencies = ["anyio>=4.12.0", "asyncer>=0.0.17", "asyncstdlib>=3.12.0"]
+
+[project.optional-dependencies]
+uvloop = [
   "uvloop>=0.22.0; platform_system != 'Windows'",
   "winloop>=0.5.0; platform_system == 'Windows'",
 ]
@@ -31,6 +31,7 @@ dev = [
   "ruff>=0.15.0",
   "ty>=0.0.31",
 ]
+uvloop = ["EDITME-4a6adabc-5e6b-407b-a0f2-989931966e03[uvloop]"]
 
 [tool.pytest.ini_options]
 addopts = [
@@ -70,6 +71,7 @@ exclude = [
 ]
 
 [tool.uv]
+default-groups = ["dev", "uvloop"]
 package = true                       # EDITME
 required-version = ">=0.9.0,<0.11.0"
 
