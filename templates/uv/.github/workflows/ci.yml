@@ -48,7 +48,7 @@ jobs:
 
       - name: Install project
         run: |
-          uv sync --locked --all-extras --dev
+          uv sync --locked
 
       - name: Run tests
         run: |
