@@ -5,13 +5,15 @@ edition = "2024"
 rust-version = "1.94.0"
 description = "EDITME"
 license-file = "LICENSE.txt"
-publish = false  # EDITME
+publish = false              # EDITME
 build = "scripts/build.rs"
 
 [dependencies]
 
 [dev-dependencies]
-cargo-husky = { version = "1.5.0", default-features = false, features = ["user-hooks"] }
+cargo-husky = { version = "1.5.0", default-features = false, features = [
+  "user-hooks",
+] }
 
 [package.metadata.bin]
 # <https://github.com/cargo-bins/cargo-binstall/issues/2476>
@@ -21,3 +23,11 @@ rumdl = { version = "0.1.59" }
 
 [workspace]
 members = ["scripts/cargo-bin"]
+
+[workspace.lints.clippy]
+all = "deny"
+pedantic = "warn"
+warnings = "deny"
+
+[workspace.lints.rust]
+warnings = "deny"

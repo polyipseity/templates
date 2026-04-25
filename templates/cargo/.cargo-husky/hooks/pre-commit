@@ -8,7 +8,7 @@ echo '+cargo check'
 cargo check --workspace --all-targets --all-features
 
 echo '+cargo clippy'
-cargo clippy --workspace --all-targets --all-features -- -D warnings
+cargo clippy --workspace --all-targets --all-features
 
 echo '+cargo fmt'
 cargo fmt --all -- --check

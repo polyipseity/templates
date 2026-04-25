@@ -6,11 +6,11 @@ bin = ["run", "--package", "cargo-bin", "--"]
 
 # Full workspace validation (slow; use only for pre-push/CI)
 build-all = ["build", "--workspace", "--all-targets", "--all-features"]
-clippy-all = ["clippy", "--workspace", "--all-targets", "--all-features", "--", "-D", "warnings"]
+clippy-all = ["clippy", "--workspace", "--all-targets", "--all-features"]
 fmt-check = ["fmt", "--all", "--", "--check"]
 test-all = ["test", "--workspace", "--all-targets", "--all-features"]
 
 # Targeted validation (recommended for most development)
-build-pkg = ["build", "-p", "--all-targets", "--all-features"]
-clippy-pkg = ["clippy", "-p", "--all-targets", "--all-features", "--", "-D", "warnings"]
-test-pkg = ["test", "-p", "--all-targets", "--all-features"]
+build-pkg = ["build", "--all-targets", "--all-features", "-p"]
+clippy-pkg = ["clippy", "--all-targets", "--all-features", "-p"]
+test-pkg = ["test", "--all-targets", "--all-features", "-p"]

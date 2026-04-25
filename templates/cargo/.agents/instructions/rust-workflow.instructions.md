@@ -30,20 +30,20 @@ across local development and CI. Use these aliases instead of inline cargo comma
 
 ### Workspace-wide aliases (slow; CI/pre-push only)
 
-| Alias        | Command                                                          | Purpose                                       |
-| ------------ | ---------------------------------------------------------------- | --------------------------------------------- |
-| `build-all`  | `build --workspace --all-targets --all-features`                 | Full workspace build including tests/docs     |
-| `clippy-all` | `clippy --workspace --all-targets --all-features -- -D warnings` | Workspace-wide lint with deny-warnings policy |
-| `fmt-check`  | `fmt --all -- --check`                                           | Workspace-wide formatting check               |
-| `test-all`   | `test --workspace --all-targets --all-features`                  | Workspace-wide test suite                     |
+| Alias        | Command                                           | Purpose                                                                          |
+| ------------ | ------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `build-all`  | `build --workspace --all-targets --all-features`  | Full workspace build including tests/docs                                        |
+| `clippy-all` | `clippy --workspace --all-targets --all-features` | Workspace-wide lint; lint levels are set in `Cargo.toml` via `[workspace.lints]` |
+| `fmt-check`  | `fmt --all -- --check`                            | Workspace-wide formatting check                                                  |
+| `test-all`   | `test --workspace --all-targets --all-features`   | Workspace-wide test suite                                                        |
 
 ### Package-targeted aliases (recommended for development)
 
-| Alias        | Command                                                       | Purpose                |
-| ------------ | ------------------------------------------------------------- | ---------------------- |
-| `build-pkg`  | `build -p <pkg> --all-targets --all-features`                 | Fast per-package build |
-| `clippy-pkg` | `clippy -p <pkg> --all-targets --all-features -- -D warnings` | Fast per-package lint  |
-| `test-pkg`   | `test -p <pkg> --all-targets --all-features`                  | Fast per-package tests |
+| Alias        | Command                                        | Purpose                                                                  |
+| ------------ | ---------------------------------------------- | ------------------------------------------------------------------------ |
+| `build-pkg`  | `build -p <pkg> --all-targets --all-features`  | Fast per-package build                                                   |
+| `clippy-pkg` | `clippy -p <pkg> --all-targets --all-features` | Fast per-package lint; lint levels are set in `Cargo.toml` via `[lints]` |
+| `test-pkg`   | `test -p <pkg> --all-targets --all-features`   | Fast per-package tests                                                   |
 
 ### Special alias
 
