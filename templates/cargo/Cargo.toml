@@ -26,8 +26,7 @@ members = ["scripts/cargo-bin"]
 
 [workspace.lints.clippy]
 all = "deny"
-pedantic = "warn"
-warnings = "deny"
+pedantic = "deny"
 
 [workspace.lints.rust]
 warnings = "deny"
