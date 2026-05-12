@@ -3,6 +3,7 @@ description: "Use when editing package.json, pyproject.toml, CI workflows, lint-
 name: "Bun and UV Tooling Contracts"
 applyTo: "package.json, pyproject.toml, bunfig.toml, opencode.json, .lintstagedrc.mjs, .commitlintrc.mjs, .github/workflows/**/*.yml, .github/dependabot.yml"
 ---
+
 # Bun and UV Tooling Contracts
 
 - Preserve the dual-runtime workflow:
@@ -10,7 +11,7 @@ applyTo: "package.json, pyproject.toml, bunfig.toml, opencode.json, .lintstagedr
   - Python tooling through UV
 - Keep version constraints intentional:
   - `packageManager: bun@1.3.10`
-  - `[tool.uv].required-version = ">=0.9.0,<0.11.0"`
+  - `[tool.uv].required-version = ">=0.11.0"`
 - Keep canonical scripts coherent in `package.json`:
   - `check`, `format`, `test`, `build`
 - In lint-staged commands, invoke underlying CLIs directly for staged-file
