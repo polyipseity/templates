@@ -72,8 +72,8 @@ exclude = [
 
 [tool.uv]
 default-groups = ["dev", "uvloop"]
-package = true                       # EDITME
-required-version = ">=0.9.0,<0.11.0"
+package = true                     # EDITME
+required-version = ">=0.11.0"
 
 [tool.uv.build-backend]
 # EDITME: Do not include any packages in the build, as this project is only a collection of tools and scripts.
