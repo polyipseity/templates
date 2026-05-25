@@ -13,9 +13,7 @@ build = "scripts/build.rs"
 [dev-dependencies]
 
 [package.metadata.bin]
-# <https://github.com/cargo-bins/cargo-binstall/issues/2476>
-# cargo-binstall = { version = "1.17.8" }
-commitlint-rs = { bins = ["commitlint"], version = "0.2.4" }
+cargo-binstall = { version = "1.17.8" }
 rumdl = { version = "0.1.59" }
 
 [workspace]
