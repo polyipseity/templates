@@ -13,8 +13,8 @@ build = "scripts/build.rs"
 [dev-dependencies]
 
 [package.metadata.bin]
-cargo-binstall = { version = "1.17.8" }
-rumdl = { version = "0.1.59" }
+cargo-binstall = { version = "1.19.1" }
+rumdl = { version = "0.2.0" }
 
 [workspace]
 members = ["scripts/cargo-bin"]
