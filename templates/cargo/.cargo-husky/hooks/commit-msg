@@ -1,5 +1,0 @@
-#!/usr/bin/env sh
-set -e
-
-echo '+cargo bin commitlint'
-cargo bin commitlint --edit "$1"

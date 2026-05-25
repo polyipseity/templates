@@ -21,6 +21,7 @@ applyTo: "**/*.rs, Cargo.toml, Cargo.lock, rust-toolchain.toml, rustfmt.toml, cl
 - `rust-toolchain.toml` for toolchain channel, profile, and components.
 - `rustfmt.toml` and `clippy.toml` for style and lint policy.
 - `.github/workflows/ci.yml` for canonical CI validation behavior.
+- `prek.toml` for local git hooks (pre-commit framework configured as TOML).
 - `scripts/` for any helper scripts (shell scripts use LF, PowerShell/batch use CRLF).
 
 ## Cargo aliases (defined in `.cargo/config.toml`)
@@ -82,6 +83,32 @@ The CI workflow runs the following sequence:
 3. `cargo clippy-all` — workspace-wide clippy with deny-warnings
 4. `cargo fmt-check` — formatting verification
 5. `cargo build-all` — final build verification
+
+## Git hooks and pre-commit
+
+This repository uses the pre-commit framework (configured via `prek.toml`) to manage local git hooks. The hooks run automatically on `git commit` and `git push` to catch issues early and auto-fix formatting:
+
+- **pre-commit stage** (on `git commit`): runs `cargo fmt` (formats code), `cargo check`, `cargo clippy`, and `rumdl fmt` (formats markdown)
+- **pre-push stage** (on `git push`): runs `cargo test --all`
+
+To install or update hooks locally, run:
+
+```bash
+pre-commit install
+```
+
+You can also run hooks manually:
+
+```bash
+pre-commit run --all-files          # Run all hooks
+pre-commit run cargo-fmt            # Run a specific hook
+```
+
+To temporarily skip hooks during a commit, use `SKIP`:
+
+```bash
+SKIP=cargo-test git commit -m "message"
+```
 
 ## When configs are incomplete
 
