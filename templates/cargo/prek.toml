@@ -1,9 +1,7 @@
-# Prek native configuration: preferred as the canonical configuration for pre-commit-style hooks.
-# Pre-commit-style configuration for common checks and Python formatting.
-# Mirrors the project's conventions: enable the recommended hooks from pre-commit-hooks and use Ruff
-# for Python formatting and linting. Adjust or opt-out of any hooks as needed per team preference.
-# This file replaces `.pre-commit-config.yaml`; that file has been removed to avoid duplication.
-# Note: `prek` can read `.pre-commit-config.yaml` for compatibility, but `prek.toml` is preferred.
+# Markdown linting using rumdl (high-performance Rust linter). These hooks
+# use the official pre-commit bridge which installs rumdl into an isolated
+# environment automatically. Keep `.markdownlint.jsonc` for compatibility;
+# rumdl auto-discovers and can import markdownlint configs via `rumdl import`.
 
 default_install_hook_types = ["commit-msg", "pre-commit", "pre-push"]
 default_stages = ["pre-commit"]
@@ -14,7 +12,7 @@ rev = "3e8a8703264a2f4a69428a0aa4dcb512790b2c8c"
 # Notes:
 # - These hooks are a recommended baseline. If a particular hook is undesired (for example, forbidding
 #   submodules in a repository that intentionally uses them), remove or configure that hook in `prek.toml`.
-# - Keep hook repositories pinned (set `rev`) to an explicit release to ensure reproducible behaviour.
+# - Keep hook repositories pinned (set `rev`) to an explicit commit hash to ensure reproducible behaviour.
 hooks = [
   { id = "check-case-conflict" },
   { id = "check-executables-have-shebangs", exclude = "\\.(bat|cmd|ps1|psd1|psm1|vbs|wsf|wsh)$" },
@@ -54,19 +52,46 @@ repo = "https://github.com/python-jsonschema/check-jsonschema.git"
 rev = "f805888065fdb6162e1f800e50bb9460cbd223d6"
 hooks = [{ id = "check-dependabot" }, { id = "check-github-workflows" }]
 
-# Local Rust hooks using cargo commands. These hooks run directly in the repository
-# (no external downloads), ensuring that checks are consistent between local development
-# and CI. Each hook uses `always_run: true` because cargo doesn't make sense to filter
-# by file types.
+# Markdown linting using rumdl (high-performance Rust linter). These hooks
+# use the official pre-commit bridge which installs rumdl into an isolated
+# environment automatically. Keep `.markdownlint.jsonc` for compatibility;
+# rumdl auto-discovers and can import markdownlint configs via `rumdl import`.
+[[repos]]
+repo = "https://github.com/rvben/rumdl-pre-commit.git"
+rev = "59d5dafbf6b16f065b4c86cbbff836f5c4a75a71"
+hooks = [{ id = "rumdl-fmt" }]
+
+# Rust hooks using FeryET/pre-commit-rust. External repo ensures compatibility
+# with standard pre-commit ecosystem while maintaining consistent cargo checks
+# between local development and CI.
 #
 # - pre-commit stage: lightweight checks and auto-fixes (fmt, clippy, check) for development velocity
 # - pre-push stage: comprehensive test suite before pushing upstream
 [[repos]]
-repo = "local"
+repo = "https://github.com/FeryET/pre-commit-rust.git"
+rev = "2b764ff13b37a64a57232a99363e6438e8877c5c"
 hooks = [
-  { id = "cargo-fmt", name = "cargo fmt", entry = "cargo fmt --all", language = "system", stages = ["pre-commit"], always_run = true, pass_filenames = false },
-  { id = "cargo-check", name = "cargo check", entry = "cargo check --workspace --all-targets --all-features", language = "system", stages = ["pre-commit"], always_run = true, pass_filenames = false },
-  { id = "cargo-clippy", name = "cargo clippy", entry = "cargo clippy --workspace --all-targets --all-features", language = "system", stages = ["pre-commit"], always_run = true, pass_filenames = false },
-  { id = "cargo-test", name = "cargo test", entry = "cargo test --workspace --all-targets --all-features", language = "system", stages = ["pre-push"], always_run = true, pass_filenames = false },
-  { id = "rumdl-fmt", name = "rumdl fmt", entry = "cargo bin rumdl fmt", language = "system", stages = ["pre-commit"], always_run = true, pass_filenames = false },
+  { id = "cargo-check", args = [
+    "--workspace",
+    "--all-targets",
+    "--all-features",
+  ] },
+  { id = "clippy", args = [
+    "--workspace",
+    "--all-targets",
+    "--all-features",
+    "--",
+  ] },
+  # fmt: upstream sets pass_filenames: true with args: ["--"], so pre-commit
+  # passes changed .rs files as: `cargo fmt -- file1.rs file2.rs`. This gives
+  # incremental formatting (only changed files). No overrides needed.
+  { id = "fmt" },
+  # test: upstream sets pass_filenames: true, but cargo test treats trailing
+  # arguments as test-name filter strings, not file paths. Passing filenames
+  # would silently run zero tests for most changes. Keep pass_filenames = false.
+  { id = "test", args = [
+    "--workspace",
+    "--all-targets",
+    "--all-features",
+  ], pass_filenames = false },
 ]
