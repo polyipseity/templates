@@ -15,7 +15,7 @@ applyTo: "package.json, pyproject.toml, bunfig.toml, prek.toml, opencode.json, .
 - Git hooks are managed by `prek.toml` (Prek is a Rust-based drop-in replacement
   for pre-commit). Keep hook stages aligned with `prek.toml`: `pre-commit` for
   formatting/linting, `commit-msg` for message validation, `pre-push` for tests.
-  See https://prek.j178.dev/ for details.
+  See <https://prek.j178.dev/> for details.
 - If Python tooling is enabled (`pyproject.toml` + `uv.lock`), prefer
   `uv run --locked ...` and keep CI/dependency automation aligned.
 - Keep lockfiles in sync for enabled package managers (`bun.lock` always;
