@@ -1,7 +1,7 @@
 ---
-description: "Use when editing package.json, pyproject.toml, CI workflows, lint-staged, or dependency automation. Preserves Bun+UV dual-tooling contracts and lockfile-safe workflows."
+description: "Use when editing package.json, pyproject.toml, CI workflows, pre-commit hooks, or dependency automation. Preserves Bun+UV dual-tooling contracts and pre-commit-only hook workflow."
 name: "Bun and UV Tooling Contracts"
-applyTo: "package.json, pyproject.toml, bunfig.toml, opencode.json, .lintstagedrc.mjs, .commitlintrc.mjs, .github/workflows/**/*.yml, .github/dependabot.yml"
+applyTo: "package.json, pyproject.toml, bunfig.toml, opencode.json, prek.toml, .commitlintrc.mjs, .github/workflows/**/*.yml, .github/dependabot.yml"
 ---
 
 # Bun and UV Tooling Contracts
@@ -14,9 +14,11 @@ applyTo: "package.json, pyproject.toml, bunfig.toml, opencode.json, .lintstagedr
   - `[tool.uv].required-version = ">=0.11.0"`
 - Keep canonical scripts coherent in `package.json`:
   - `check`, `format`, `test`, `build`
-- In lint-staged commands, invoke underlying CLIs directly for staged-file
-  argument forwarding (avoid `bun run` wrappers for file-list-sensitive tools).
-- Prefer `uv run --locked ...` for Python lint/format/test commands.
+- Manage all pre-commit hooks in `prek.toml` (not `.pre-commit-config.yaml`).
+  - Husky and lint-staged are removed; pre-commit runs all formatting and checks on hook stages.
+  - Local hooks using `language: system` invoke Bun for Node.js tools (e.g., prettier, commitlint).
+  - Prefer `uv run --locked ...` for Python lint/format/test commands in hooks.
+- Prefer `uv run --locked ...` for Python CLI commands in CI and local scripts.
 - Keep CI install and test flow compatible with current lockfile strategy
   (`bun install --frozen-lockfile --ignore-scripts` + `uv sync --locked ...`).
 - When changing dependency config, ensure corresponding lockfiles remain in

@@ -42,15 +42,15 @@
 - Module, top-level definitions, and top-level assignments must be documented
   with docstrings (enforced by `tests/test_docstrings.py`).
 - Keep `__all__` after top-level imports.
-- For staged-file workflows, run underlying CLIs directly (not `bun run`) when
-  file arguments must be forwarded by lint-staged.
+- Git hooks are managed by `prek.toml`, a fast Rust-based drop-in replacement
+  for pre-commit. Hooks automatically receive staged files by default.
 - Async tests use AnyIO conventions from `tests/conftest.py`.
 
 ## Key References
 
 - `package.json` — canonical Bun scripts (`check`, `format`, `test`, `build`)
 - `pyproject.toml` — Python dependencies, Ruff, Ty, pytest, UV constraints
-- `.lintstagedrc.mjs` — staged-file command forwarding conventions
+- `prek.toml` — Git hook configuration (pre-commit, commit-msg, pre-push stages)
 - `tests/test_module_exports.py` — `__all__` policy and ordering checks
 - `tests/test_docstrings.py` — docstring policy for modules/definitions/variables
 - `tests/test_git_executable.py` — executable-bit checks for script files
