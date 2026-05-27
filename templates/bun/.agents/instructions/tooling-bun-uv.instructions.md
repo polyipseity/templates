@@ -1,7 +1,7 @@
 ---
-description: "Use when editing package.json, bunfig.toml, opencode.json, lint-staged, or CI/dependency automation. Preserves Bun script contracts and optional UV contracts when Python tooling is enabled."
+description: "Use when editing package.json, bunfig.toml, prek.toml, opencode.json, or CI/dependency automation. Preserves Bun script contracts, prek hook configuration, and optional UV contracts when Python tooling is enabled."
 name: "Bun Tooling Contracts"
-applyTo: "package.json, pyproject.toml, bunfig.toml, opencode.json, .lintstagedrc.mjs, .commitlintrc.mjs, .github/workflows/**/*.yml, .github/dependabot.yml"
+applyTo: "package.json, pyproject.toml, bunfig.toml, prek.toml, opencode.json, .commitlintrc.mjs, .github/workflows/**/*.yml, .github/dependabot.yml"
 ---
 # Bun Tooling Contracts
 
@@ -12,8 +12,10 @@ applyTo: "package.json, pyproject.toml, bunfig.toml, opencode.json, .lintstagedr
   - `check`, `format`, `test`, `build`
 - Ensure each script only references defined subscripts (for example, avoid
   dangling `check:*`/`format:*` entries).
-- In lint-staged commands, invoke underlying CLIs directly for staged-file
-  argument forwarding (avoid `bun run` wrappers for file-list-sensitive tools).
+- Git hooks are managed by `prek.toml` (Prek is a Rust-based drop-in replacement
+  for pre-commit). Keep hook stages aligned with `prek.toml`: `pre-commit` for
+  formatting/linting, `commit-msg` for message validation, `pre-push` for tests.
+  See https://prek.j178.dev/ for details.
 - If Python tooling is enabled (`pyproject.toml` + `uv.lock`), prefer
   `uv run --locked ...` and keep CI/dependency automation aligned.
 - Keep lockfiles in sync for enabled package managers (`bun.lock` always;

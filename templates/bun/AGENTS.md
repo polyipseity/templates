@@ -36,8 +36,8 @@
 
 ## Conventions
 
-- For staged-file workflows, run underlying CLIs directly (not `bun run`) when
-  file arguments must be forwarded by lint-staged.
+- Git hooks are managed by `prek.toml`, a fast Rust-based drop-in replacement
+  for pre-commit. Hooks automatically receive staged files by default.
 - If Python quality gates are enabled in this template, add/update
   `pyproject.toml`, `uv.lock`, and policy tests under `tests/` in the same
   change.
@@ -46,7 +46,7 @@
 ## Key References
 
 - `package.json` — canonical Bun scripts (`check`, `format`, `test`, `build`)
-- `.lintstagedrc.mjs` — staged-file command forwarding conventions
+- `prek.toml` — Git hook configuration (pre-commit, commit-msg, pre-push stages)
 - `opencode.json` — `.agents/instructions/**` and skill path configuration
 - `.agents/instructions/tooling-bun-uv.instructions.md` — Bun contracts and
   optional UV enablement guidance
