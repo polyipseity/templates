@@ -25,7 +25,7 @@
   - `bun install --frozen-lockfile --ignore-scripts`
   - `uv sync --locked`
 - Prefer locked Python CLI runs (`uv run --locked ...`) to match CI and
-  lint-staged behavior.
+  pre-commit hook behavior.
 - When a change affects validation or release automation, check both
   `.github/workflows/ci.yml` and `.github/workflows/commitlint.yml`.
 
@@ -38,8 +38,8 @@
   88-character line length.
 - Preserve file-specific line endings: Markdown and shell files use LF;
   PowerShell and batch files use CRLF.
-- In `.lintstagedrc.mjs`, prefer direct CLIs that can receive the staged file
-  list instead of wrapping them in `bun run`.
+- Git hooks are managed by `prek.toml`, a fast Rust-based drop-in replacement
+  for pre-commit.
 
 ## Conventions
 
@@ -51,14 +51,14 @@
   `.agents/instructions/template-variants.instructions.md`.
 - When editing `AGENTS.md`, `.agents/**`, or `opencode.json`, follow
   `.agents/instructions/agent-customization.instructions.md`.
-- When editing Husky, commitlint, lint-staged, formatting, or line-ending
+- When editing prek, commitlint, formatting, or line-ending
   rules, follow `.agents/instructions/tooling-and-automation.instructions.md`.
 - If you add helper scripts under `scripts/`, make sure git tracks executable
   ones with the correct mode; see `tests/test_git_executable.py`.
 - Do not assume content under `templates/*/**` is type-checked by the root
   Ty configuration; those paths are excluded in `pyproject.toml`.
 - For commit-related automation, follow Conventional Commits and the existing
-  commitlint + Husky setup; see `.commitlintrc.mjs`, `.husky/commit-msg`, and
+  commitlint + prek setup; see `.commitlintrc.mjs`, `prek.toml`, and
   `.agents/prompts/commit-staged.prompt.md`.
 - If you change a repository policy, update the enforcing tests/configuration
   and the relevant instruction file in the same change.
