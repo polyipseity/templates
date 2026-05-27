@@ -77,7 +77,6 @@ hooks = [
     "javascript",
     "jsx",
     "json",
-    "jsonc",
     "json5",
     "ts",
     "tsx",
@@ -88,7 +87,6 @@ hooks = [
     "less",
     "html",
     "yaml",
-    "yml",
     "graphql",
   ] },
   # Type checkers need global context, not individual files
