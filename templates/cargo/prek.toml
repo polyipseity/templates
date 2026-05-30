@@ -59,7 +59,7 @@ hooks = [{ id = "check-dependabot" }, { id = "check-github-workflows" }]
 # rumdl auto-discovers and can import markdownlint configs via `rumdl import`.
 [[repos]]
 repo = "https://github.com/rvben/rumdl-pre-commit.git"
-rev = "59d5dafbf6b16f065b4c86cbbff836f5c4a75a71"
+rev = "6246326e7adfedf5f052775ce3722e93e44c7f03"
 hooks = [{ id = "rumdl-fmt" }]
 
 # Rust hooks using FeryET/pre-commit-rust. External repo ensures compatibility
@@ -72,21 +72,27 @@ hooks = [{ id = "rumdl-fmt" }]
 repo = "https://github.com/FeryET/pre-commit-rust.git"
 rev = "2b764ff13b37a64a57232a99363e6438e8877c5c"
 hooks = [
+  # fmt: upstream sets pass_filenames: true with args: ["--"], so pre-commit
+  # passes changed .rs files as: `cargo fmt -- file1.rs file2.rs`. This gives
+  # incremental formatting (only changed files). No overrides needed.
+  { id = "fmt" },
+  # cargo-check: slow, so only run on pre-push
   { id = "cargo-check", args = [
     "--workspace",
     "--all-targets",
     "--all-features",
+  ], stages = [
+    "pre-push",
   ] },
+  # clippy: slow, so only run on pre-push
   { id = "clippy", args = [
     "--workspace",
     "--all-targets",
     "--all-features",
     "--",
+  ], stages = [
+    "pre-push",
   ] },
-  # fmt: upstream sets pass_filenames: true with args: ["--"], so pre-commit
-  # passes changed .rs files as: `cargo fmt -- file1.rs file2.rs`. This gives
-  # incremental formatting (only changed files). No overrides needed.
-  { id = "fmt" },
   # test: upstream sets pass_filenames: true, but cargo test treats trailing
   # arguments as test-name filter strings, not file paths. Passing filenames
   # would silently run zero tests for most changes. Keep pass_filenames = false.
@@ -94,5 +100,7 @@ hooks = [
     "--workspace",
     "--all-targets",
     "--all-features",
-  ], pass_filenames = false },
+  ], pass_filenames = false, stages = [
+    "pre-push",
+  ] },
 ]
