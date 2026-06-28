@@ -18,6 +18,5 @@ applyTo: ".commitlintrc.mjs,.editorconfig,.gitattributes,.husky/**,.lintstagedrc
 - Conventional Commits are enforced locally and in GitHub Actions.
 - Commit bodies should wrap to 72 characters.
 - `.agents/prompts/commit-staged.prompt.md` is the source of truth for commit automation.
-- Keep formatting globs aligned across `.markdownlint-cli2.mjs`,
-  `.lintstagedrc.mjs`, and `package.json`.
+- Keep formatting globs aligned across `.markdownlint-cli2.mjs`, `.lintstagedrc.mjs`, and `package.json`.
 - Markdown in `.agents/` also follows `.agents/.markdownlint.jsonc`.

@@ -10,9 +10,6 @@ applyTo: "scripts/*.sh, scripts/*.py, scripts/*.ps1, scripts/*.bat, scripts/*.cm
   - `.sh` uses LF
   - `.ps1` and `.bat` use CRLF
 - On non-Windows platforms, ensure executable scripts have executable bits set.
-- Keep git index mode expectations compatible with
-  `tests/test_git_executable.py`.
-- Prefer explicit, portable script behavior and avoid shell-specific assumptions
-  unless the script extension already constrains the shell.
-- If introducing new script extensions or locations, update tests and glob
-  specifications intentionally.
+- Keep git index mode expectations compatible with `tests/test_git_executable.py`.
+- Prefer explicit, portable script behavior and avoid shell-specific assumptions unless the script extension already constrains the shell.
+- If introducing new script extensions or locations, update tests and glob specifications intentionally.

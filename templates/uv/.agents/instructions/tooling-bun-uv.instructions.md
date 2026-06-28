@@ -19,10 +19,7 @@ applyTo: "pyproject.toml, prek.toml, opencode.json, .commitlintrc.mjs, .github/w
   - `uv run --locked ty`
   - `uv build`
 - Prefer `uv run --locked ...` for Python lint/format/test commands.
-- Keep commit-message conventions compatible with `.commitlintrc.mjs`
-  (`@commitlint/config-conventional`).
-- When changing dependency config, ensure `uv.lock` stays in sync and
-  `dependabot.yml` remains accurate.
+- Keep commit-message conventions compatible with `.commitlintrc.mjs` (`@commitlint/config-conventional`).
+- When changing dependency config, ensure `uv.lock` stays in sync and `dependabot.yml` remains accurate.
 - Keep `opencode.json` instruction/skill paths valid when moving directories.
-- If Bun or other JS orchestration is introduced later, update `AGENTS.md` and
-  this instruction intentionally instead of assuming it is always present.
+- If Bun or other JS orchestration is introduced later, update `AGENTS.md` and this instruction intentionally instead of assuming it is always present.

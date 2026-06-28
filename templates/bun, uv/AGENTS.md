@@ -2,18 +2,13 @@
 
 ## Repository Shape
 
-- Root `AGENTS.md` is the workspace-wide source of truth. Do not add
-  `.github/copilot-instructions.md`.
-- Keep this file short and durable. Put focused guidance in
-  `.agents/instructions/*.instructions.md`, reusable workflows in
-  `.agents/prompts/`, and skill code/assets in `.agents/skills/`.
+- Root `AGENTS.md` is the workspace-wide source of truth. Do not add `.github/copilot-instructions.md`.
+- Keep this file short and durable. Put focused guidance in `.agents/instructions/*.instructions.md`, reusable workflows in `.agents/prompts/`, and skill code/assets in `.agents/skills/`.
 
 ## Architecture
 
-- This repository is a Bun + UV template for mixed JavaScript tooling and
-  Python quality gates.
-- Python source and checks center on `src/`, `tests/`, `scripts/`, and
-  `.agents/skills/**` (when present).
+- This repository is a Bun + UV template for mixed JavaScript tooling and Python quality gates.
+- Python source and checks center on `src/`, `tests/`, `scripts/`, and `.agents/skills/**` (when present).
 - Runtime/config boundaries are file-driven:
   - `package.json` + `bunfig.toml` for JS/task orchestration
   - `pyproject.toml` for Python deps, lint/type/test config
@@ -30,20 +25,15 @@
   - `bun run build`
 - Formatting:
   - `bun run format`
-- Prefer locked Python tool execution through UV (for example,
-  `uv run --locked ruff check`, `uv run --locked pytest`).
+- Prefer locked Python tool execution through UV (for example, `uv run --locked ruff check`, `uv run --locked pytest`).
 
 ## Conventions
 
-- Python version is `3.14` with strict type checking (`ty` in
-  `pyproject.toml`).
-- Every Python module in scoped paths must define module-level `__all__` as a
-  tuple of string literals (enforced by `tests/test_module_exports.py`).
-- Module, top-level definitions, and top-level assignments must be documented
-  with docstrings (enforced by `tests/test_docstrings.py`).
+- Python version is `3.14` with strict type checking (`ty` in `pyproject.toml`).
+- Every Python module in scoped paths must define module-level `__all__` as a tuple of string literals (enforced by `tests/test_module_exports.py`).
+- Module, top-level definitions, and top-level assignments must be documented with docstrings (enforced by `tests/test_docstrings.py`).
 - Keep `__all__` after top-level imports.
-- Git hooks are managed by `prek.toml`, a fast Rust-based drop-in replacement
-  for pre-commit. Hooks automatically receive staged files by default.
+- Git hooks are managed by `prek.toml`, a fast Rust-based drop-in replacement for pre-commit. Hooks automatically receive staged files by default.
 - Async tests use AnyIO conventions from `tests/conftest.py`.
 
 ## Key References

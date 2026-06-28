@@ -8,15 +8,12 @@ applyTo: "tests/**/*.py, .agents/skills/**/tests_*.py"
 - Apply these rules when pytest/AnyIO tests are present in this repository.
 - Use `pytest` conventions and keep tests deterministic.
 - Prefer `@pytest.mark.anyio` for async tests.
-- If `tests/conftest.py` defines async backend policy, keep async tests aligned
-  with that configuration.
+- If `tests/conftest.py` defines async backend policy, keep async tests aligned with that configuration.
 - Avoid network calls, external side effects, and flaky timing assumptions.
 - Prefer explicit, descriptive assertions and failure messages.
-- For static-policy checks (exports/docstrings), prefer AST parsing over
-  importing modules with side effects.
+- For static-policy checks (exports/docstrings), prefer AST parsing over importing modules with side effects.
 - Keep tests in the configured paths:
   - `tests/`
   - `.agents/skills/**/tests_*`
 
-Run test validation with the active project workflow (`bun run test` and, when
-enabled, `uv run --locked pytest`).
+Run test validation with the active project workflow (`bun run test` and, when enabled, `uv run --locked pytest`).

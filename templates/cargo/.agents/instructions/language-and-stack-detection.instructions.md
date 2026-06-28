@@ -9,10 +9,8 @@ applyTo: "AGENTS.md, .agents/instructions/**/*.md"
 ## Goal
 
 - Treat stack discovery as an evidence-based process.
-- Before you write language-specific, framework-specific, or runtime-specific
-  instructions, determine what the repository actually uses.
-- Once detected, add instructions for the detected stack carefully and
-  thoroughly in focused files with narrow scope.
+- Before you write language-specific, framework-specific, or runtime-specific instructions, determine what the repository actually uses.
+- Once detected, add instructions for the detected stack carefully and thoroughly in focused files with narrow scope.
 
 ## Detection order
 
@@ -23,47 +21,33 @@ applyTo: "AGENTS.md, .agents/instructions/**/*.md"
   - CI workflows and repo scripts
   - source directories, file extensions, and representative entrypoints
   - editor settings and automation configs
-- Prefer multiple signals over a single clue when deciding that a stack is
-  truly in use.
-- If evidence conflicts, document the ambiguity and avoid inventing hard rules
-  until the repository structure clarifies the intended setup.
+- Prefer multiple signals over a single clue when deciding that a stack is truly in use.
+- If evidence conflicts, document the ambiguity and avoid inventing hard rules until the repository structure clarifies the intended setup.
 
 ## What to detect
 
 - Programming languages in active use, not merely hinted at by empty folders.
-- Frameworks, build systems, package managers, test runners, linters,
-  formatters, type checkers, documentation generators, and release tooling.
-- Directory boundaries that deserve their own instructions because they follow
-  different conventions.
+- Frameworks, build systems, package managers, test runners, linters, formatters, type checkers, documentation generators, and release tooling.
+- Directory boundaries that deserve their own instructions because they follow different conventions.
 - Canonical commands, if any, and where they are defined.
-- Platform-specific constraints such as line endings, executable bits, or shell
-  assumptions.
+- Platform-specific constraints such as line endings, executable bits, or shell assumptions.
 
 ## Evidence standards
 
 - A single empty directory is weak evidence.
-- A real config file, lockfile, script, workflow step, or representative source
-  file is strong evidence.
-- Comments in docs are weaker than executable config unless the docs are clearly
-  the source of truth.
+- A real config file, lockfile, script, workflow step, or representative source file is strong evidence.
+- Comments in docs are weaker than executable config unless the docs are clearly the source of truth.
 - Prefer on-disk facts over habits carried from similar repositories.
 
 ## How to write follow-up instructions
 
-- When a stack is detected, create or refine a focused instruction file whose
-  `name`, `description`, and `applyTo` clearly target that stack.
-- Keep repo-wide discovery rules in `AGENTS.md` and stack details in dedicated
-  files; do not overload the root guidance.
-- Make the new instruction thorough enough to cover code structure, tests,
-  commands, config files, pitfalls, and validation workflow for that stack.
-- Link to canonical config files instead of copying long option lists unless a
-  short inline summary is critical to agent behavior.
+- When a stack is detected, create or refine a focused instruction file whose `name`, `description`, and `applyTo` clearly target that stack.
+- Keep repo-wide discovery rules in `AGENTS.md` and stack details in dedicated files; do not overload the root guidance.
+- Make the new instruction thorough enough to cover code structure, tests, commands, config files, pitfalls, and validation workflow for that stack.
+- Link to canonical config files instead of copying long option lists unless a short inline summary is critical to agent behavior.
 
 ## What to avoid
 
-- Do not assume a default language or task runner just because a similar repo
-  used one.
-- Do not keep stale stack-specific files after the repo has been generalized or
-  reoriented.
-- Do not leave broad placeholders such as "follow standard best practices" when
-  concrete repository evidence can support sharper guidance.
+- Do not assume a default language or task runner just because a similar repo used one.
+- Do not keep stale stack-specific files after the repo has been generalized or reoriented.
+- Do not leave broad placeholders such as "follow standard best practices" when concrete repository evidence can support sharper guidance.

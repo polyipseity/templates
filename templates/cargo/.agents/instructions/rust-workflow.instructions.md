@@ -9,10 +9,8 @@ applyTo: "**/*.rs, Cargo.toml, Cargo.lock, rust-toolchain.toml, rustfmt.toml, cl
 ## Scope
 
 - Apply this guidance when working on Rust source or Rust-specific tooling.
-- Treat this repository as a template with a Rust bootstrap setup that may grow
-  additional packages over time.
-- Do not assume `PLAN.md` or other planning docs are already implemented unless
-  task scope explicitly asks for them.
+- Treat this repository as a template with a Rust bootstrap setup that may grow additional packages over time.
+- Do not assume `PLAN.md` or other planning docs are already implemented unless task scope explicitly asks for them.
 
 ## Source-of-truth files
 
@@ -26,8 +24,7 @@ applyTo: "**/*.rs, Cargo.toml, Cargo.lock, rust-toolchain.toml, rustfmt.toml, cl
 
 ## Cargo aliases (defined in `.cargo/config.toml`)
 
-The `.cargo/config.toml` defines cargo aliases to standardize validation commands
-across local development and CI. Use these aliases instead of inline cargo commands.
+The `.cargo/config.toml` defines cargo aliases to standardize validation commands across local development and CI. Use these aliases instead of inline cargo commands.
 
 ### Workspace-wide aliases (slow; CI/pre-push only)
 
@@ -112,17 +109,11 @@ SKIP=cargo-test git commit -m "message"
 
 ## When configs are incomplete
 
-If `Cargo.toml`, `rust-toolchain.toml`, or other configs are incomplete or
-missing, report the gaps explicitly rather than inventing fallback commands.
-A sparse template is expected; agents should not pretend validation infrastructure
-exists when it does not.
+If `Cargo.toml`, `rust-toolchain.toml`, or other configs are incomplete or missing, report the gaps explicitly rather than inventing fallback commands. A sparse template is expected; agents should not pretend validation infrastructure exists when it does not.
 
 ## Editing conventions
 
-- Prefer the cargo aliases over inline commands; they are the canonical reference
-  in `.cargo/config.toml`.
-- When adding a new package to the workspace, update validation guidance to
-  mention the new package name in examples.
-- Avoid introducing hidden mutable state or external service dependencies unless
-  explicitly requested.
+- Prefer the cargo aliases over inline commands; they are the canonical reference in `.cargo/config.toml`.
+- When adding a new package to the workspace, update validation guidance to mention the new package name in examples.
+- Avoid introducing hidden mutable state or external service dependencies unless explicitly requested.
 - Keep Rust-specific detail in this file rather than growing root `AGENTS.md`.

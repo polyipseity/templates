@@ -12,18 +12,13 @@ applyTo: "**/*.py"
 - Add docstrings for:
   - all top-level functions, async functions, and classes
   - nested functions and methods
-  - top-level assignments/constants via an immediately preceding
-    string-literal expression
-- Use complete type annotations compatible with Ty strict mode
-  (`python-version = "3.14"`).
-- Prefer top-level imports; avoid import-outside-top-level patterns unless
-  there is a strong reason (`PLC0415` is enabled in Ruff).
+  - top-level assignments/constants via an immediately preceding string-literal expression
+- Use complete type annotations compatible with Ty strict mode (`python-version = "3.14"`).
+- Prefer top-level imports; avoid import-outside-top-level patterns unless there is a strong reason (`PLC0415` is enabled in Ruff).
 - When validating or fixing Python quality, prefer:
   - `uv run --locked ruff check`
   - `uv run --locked ruff format`
   - `uv run --locked pytest`
-- When adding or renaming exported symbols, update `__all__` in the same
-  change.
+- When adding or renaming exported symbols, update `__all__` in the same change.
 
-See `tests/test_module_exports.py` and `tests/test_docstrings.py` for the
-canonical policy checks.
+See `tests/test_module_exports.py` and `tests/test_docstrings.py` for the canonical policy checks.

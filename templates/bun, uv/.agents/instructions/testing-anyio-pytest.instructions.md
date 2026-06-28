@@ -7,12 +7,10 @@ applyTo: "tests/**/*.py, .agents/skills/**/tests_*.py"
 
 - Use `pytest` conventions and keep tests deterministic.
 - Prefer `@pytest.mark.anyio` for async tests.
-- Keep async backend expectations aligned with `tests/conftest.py`
-  (`("asyncio", {"use_uvloop": True})`).
+- Keep async backend expectations aligned with `tests/conftest.py` (`("asyncio", {"use_uvloop": True})`).
 - Avoid network calls, external side effects, and flaky timing assumptions.
 - Prefer explicit, descriptive assertions and failure messages.
-- For static-policy checks (exports/docstrings), prefer AST parsing over
-  importing modules with side effects.
+- For static-policy checks (exports/docstrings), prefer AST parsing over importing modules with side effects.
 - Keep tests in the configured paths:
   - `tests/`
   - `.agents/skills/**/tests_*`

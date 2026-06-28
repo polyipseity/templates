@@ -19,8 +19,6 @@ applyTo: "package.json, pyproject.toml, bunfig.toml, opencode.json, prek.toml, .
   - Local hooks using `language: system` invoke Bun for Node.js tools (e.g., prettier, commitlint).
   - Prefer `uv run --locked ...` for Python lint/format/test commands in hooks.
 - Prefer `uv run --locked ...` for Python CLI commands in CI and local scripts.
-- Keep CI install and test flow compatible with current lockfile strategy
-  (`bun install --frozen-lockfile --ignore-scripts` + `uv sync --locked ...`).
-- When changing dependency config, ensure corresponding lockfiles remain in
-  sync (`bun.lock`, `uv.lock`) and dependabot scope remains accurate.
+- Keep CI install and test flow compatible with current lockfile strategy (`bun install --frozen-lockfile --ignore-scripts` + `uv sync --locked ...`).
+- When changing dependency config, ensure corresponding lockfiles remain in sync (`bun.lock`, `uv.lock`) and dependabot scope remains accurate.
 - Keep `opencode.json` instruction/skill paths valid when moving directories.

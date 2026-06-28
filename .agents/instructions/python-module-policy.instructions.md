@@ -6,8 +6,7 @@ applyTo: "tests/**/*.py,src/**/*.py,scripts/**/*.py,.agents/skills/**/*.py"
 
 # Python Module Policy
 
-- Treat `tests/test_docstrings.py` and `tests/test_module_exports.py` as the
-  source of truth.
+- Treat `tests/test_docstrings.py` and `tests/test_module_exports.py` as the source of truth.
 - Every module must have a non-empty module docstring.
 - After top-level imports, define `__all__` as a tuple of string literals.
 - If nothing is exported, use `__all__ = ()`.
