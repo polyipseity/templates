@@ -35,6 +35,7 @@
 - Keep `__all__` after top-level imports.
 - Git hooks are managed by `prek.toml`, a fast Rust-based drop-in replacement for pre-commit. Hooks automatically receive staged files by default.
 - Async tests use AnyIO conventions from `tests/conftest.py`.
+- Include supply chain attack hardening by default (minimumReleaseAge in bunfig.toml for Bun, exclude-newer in pyproject.toml for uv).
 
 ## Key References
 

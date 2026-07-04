@@ -37,6 +37,7 @@
 - Keep `__all__` after top-level imports.
 - Keep commit messages compatible with `.commitlintrc.mjs` (`@commitlint/config-conventional`).
 - Async tests use AnyIO conventions from `tests/conftest.py`.
+- Include supply chain attack hardening by default (exclude-newer in pyproject.toml for uv).
 
 ## Key References
 

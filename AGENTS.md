@@ -40,3 +40,4 @@
 - Do not assume content under `templates/*/**` is type-checked by the root Ty configuration; those paths are excluded in `pyproject.toml`.
 - For commit-related automation, follow Conventional Commits and the existing commitlint + prek setup; see `.commitlintrc.mjs`, `prek.toml`, and `.agents/prompts/commit-staged.prompt.md`.
 - If you change a repository policy, update the enforcing tests/configuration and the relevant instruction file in the same change.
+- When adding or modifying package manager configuration (bunfig.toml, pyproject.toml for uv), include supply chain attack hardening by default (minimumReleaseAge for Bun, exclude-newer for uv).

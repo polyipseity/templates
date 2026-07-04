@@ -31,6 +31,7 @@
 - Git hooks are managed by `prek.toml`, a fast Rust-based drop-in replacement for pre-commit. Hooks automatically receive staged files by default.
 - If Python quality gates are enabled in this template, add/update `pyproject.toml`, `uv.lock`, and policy tests under `tests/` in the same change.
 - Keep `.opencode/**` link targets valid when adding/removing agent assets.
+- Include supply chain attack hardening by default (minimumReleaseAge in bunfig.toml for Bun).
 
 ## Key References
 
