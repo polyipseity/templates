@@ -5,7 +5,9 @@ include a minimum release age or equivalent delay to mitigate supply chain
 attacks. This test verifies that:
 
 - ``bunfig.toml`` files include ``minimumReleaseAge`` under ``[install]``.
+- ``bunfig.toml`` files include ``exact = true`` under ``[install]``.
 - ``pyproject.toml`` files include ``exclude-newer`` under ``[tool.uv]``.
+- ``pyproject.toml`` files include ``add-bounds = "exact"`` under ``[tool.uv]``.
 
 Where applicable, each checked value is verified against a specific minimum
 delay (currently 5 days / 432000 seconds for Bun).
@@ -66,8 +68,32 @@ def test_supply_chain_delay_present(rel_path: str, pm: str) -> None:
         tool_uv = config.get("tool", {}).get("uv", {})
         newer = tool_uv.get("exclude-newer")
         assert newer is not None, f"{rel_path}: missing [tool.uv].exclude-newer"
-        assert isinstance(newer, str) and len(newer) >= 3, (
-            f"{rel_path}: exclude-newer must be a non-trivial string"
+        assert newer == "P5D", (
+            f'{rel_path}: exclude-newer should be "P5D", got {newer!r}'
+        )
+    else:
+        pytest.fail(f"Unknown package manager: {pm}")
+
+
+@pytest.mark.parametrize(("rel_path", "pm"), _CHECK_PATHS)
+def test_pinning_config_present(rel_path: str, pm: str) -> None:
+    """Verify that the configuration file at *rel_path* includes the
+    expected exact-version-pinning setting for the given *pm* tool."""
+    path = Path(rel_path)
+    assert path.exists(), f"Missing config file: {rel_path}"
+    config = _load_toml(path)
+
+    if pm == "bun":
+        install = config.get("install", {})
+        exact = install.get("exact")
+        assert exact is True, (
+            f"{rel_path}: [install].exact should be true, got {exact!r}"
+        )
+    elif pm == "uv":
+        tool_uv = config.get("tool", {}).get("uv", {})
+        bounds = tool_uv.get("add-bounds")
+        assert bounds == "exact", (
+            f'{rel_path}: [tool.uv].add-bounds should be "exact", got {bounds!r}'
         )
     else:
         pytest.fail(f"Unknown package manager: {pm}")
