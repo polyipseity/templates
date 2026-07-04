@@ -71,6 +71,7 @@ exclude = [
 ]
 
 [tool.uv]
+add-bounds = "exact"
 exclude-newer = "P5D"                  # EDITME
 default-groups = ["dev", "uvloop"]
 package = true                     # EDITME
