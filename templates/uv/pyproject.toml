@@ -73,7 +73,7 @@ exclude = [
 ]
 
 [tool.uv]
-exclude-newer = "5 days"             # EDITME
+exclude-newer = "P5D"                  # EDITME
 default-groups = ["dev", "uvloop"]
 package = true                     # EDITME
 required-version = ">=0.11.0"
