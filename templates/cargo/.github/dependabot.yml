@@ -6,7 +6,8 @@ version: 2
 updates:
   # Rust crate dependencies (Cargo.toml / Cargo.lock)
   - package-ecosystem: "cargo"
-    directory: "/"
+    directories:
+      - "**/*"
     schedule:
       interval: "monthly"
     commit-message:
@@ -26,7 +27,8 @@ updates:
 
   # GitHub Actions (workflow dependencies)
   - package-ecosystem: "github-actions"
-    directory: "/"
+    directories:
+      - "**/*"
     schedule:
       interval: "monthly"
     commit-message:
@@ -46,7 +48,8 @@ updates:
 
   # Git submodules (gitmodules)
   - package-ecosystem: "gitsubmodule"
-    directory: "/"
+    directories:
+      - "**/*"
     schedule:
       interval: "monthly"
     commit-message:
