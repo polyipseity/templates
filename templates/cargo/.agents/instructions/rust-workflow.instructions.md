@@ -29,20 +29,20 @@ The `.cargo/config.toml` defines cargo aliases to standardize validation command
 
 ### Workspace-wide aliases (slow; CI/pre-push only)
 
-| Alias        | Command                                           | Purpose                                                                          |
-| ------------ | ------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `build-all`  | `build --workspace --all-targets --all-features`  | Full workspace build including tests/docs                                        |
-| `clippy-all` | `clippy --workspace --all-targets --all-features` | Workspace-wide lint; lint levels are set in `Cargo.toml` via `[workspace.lints]` |
-| `fmt-check`  | `fmt --all -- --check`                            | Workspace-wide formatting check                                                  |
-| `test-all`   | `run --package cargo-bin -- cargo-nextest run --workspace --all-targets --all-features` | Workspace-wide test suite via nextest (auto-installs via binstall)               |
+| Alias        | Command                                                                                          | Purpose                                                                          |
+| ------------ | ------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------- |
+| `build-all`  | `build --workspace --all-targets --all-features`                                                 | Full workspace build including tests/docs                                        |
+| `clippy-all` | `clippy --workspace --all-targets --all-features`                                                | Workspace-wide lint; lint levels are set in `Cargo.toml` via `[workspace.lints]` |
+| `fmt-check`  | `fmt --all -- --check`                                                                           | Workspace-wide formatting check                                                  |
+| `test-all`   | `run --package cargo-bin -- cargo-nextest run --workspace --all-targets --all-features`          | Workspace-wide test suite via nextest (auto-installs via binstall)               |
 
 ### Package-targeted aliases (recommended for development)
 
-| Alias        | Command                                        | Purpose                                                                  |
-| ------------ | ---------------------------------------------- | ------------------------------------------------------------------------ |
-| `build-pkg`  | `build -p <pkg> --all-targets --all-features`  | Fast per-package build                                                   |
-| `clippy-pkg` | `clippy -p <pkg> --all-targets --all-features` | Fast per-package lint; lint levels are set in `Cargo.toml` via `[lints]` |
-| `test-pkg`   | `run --package cargo-bin -- cargo-nextest run --all-targets --all-features -p` | Fast per-package tests via nextest (auto-installs via binstall)          |
+| Alias        | Command                                                                                    | Purpose                                                                  |
+| ------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| `build-pkg`  | `build -p <pkg> --all-targets --all-features`                                              | Fast per-package build                                                   |
+| `clippy-pkg` | `clippy -p <pkg> --all-targets --all-features`                                             | Fast per-package lint; lint levels are set in `Cargo.toml` via `[lints]` |
+| `test-pkg`   | `run --package cargo-bin -- cargo-nextest run --all-targets --all-features -p`             | Fast per-package tests via nextest (auto-installs via binstall)          |
 
 ### Special alias
 
