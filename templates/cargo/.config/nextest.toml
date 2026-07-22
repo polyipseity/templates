@@ -30,7 +30,7 @@ max-progress-running = 4
 # Per-test timeout: kill a test that runs >60s with no output.
 # Leak detection: warn if a test doesn't clean up child processes within 100ms.
 [profile.default]
-slow-timeout = { period = "10s", terminate-after = "60s" }
+slow-timeout = { period = "10s", terminate-after = 60 }
 leak-timeout = "100ms"
 
 # ── CI profile (more conservative) ─────────────────────────────────────
@@ -40,4 +40,4 @@ leak-timeout = "100ms"
 [profile.ci]
 fail-fast = false
 retries = 2
-slow-timeout = { period = "15s", terminate-after = "120s" }
+slow-timeout = { period = "15s", terminate-after = 120 }
