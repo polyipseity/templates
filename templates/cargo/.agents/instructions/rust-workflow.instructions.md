@@ -21,7 +21,7 @@ applyTo: "**/*.rs, Cargo.toml, Cargo.lock, rust-toolchain.toml, rustfmt.toml, cl
 - `rustfmt.toml` and `clippy.toml` for style and lint policy.
 - `.github/workflows/ci.yml` for canonical CI validation behavior.
 - `prek.toml` for local git hooks (pre-commit framework configured as TOML).
-- `scripts/` for any helper scripts (shell scripts use LF, PowerShell/batch use CRLF).
+- `scripts/` for any helper scripts (shell scripts use LF, PowerShell/batch use CRLF); includes both `run-all-tests.sh` (POSIX) and `run-all-tests.ps1` (Windows).
 
 ## Cargo aliases (defined in `.cargo/config.toml`)
 
@@ -84,6 +84,9 @@ scripts/run-all-tests.sh
 
 The script runs `cargo test-all` (nextest) then `cargo test --doc --workspace` (doctests, which nextest does not cover). Both invocations use `--locked` for reproducible dependency resolution. CI uses this same script.
 
+A PowerShell equivalent (`scripts/run-all-tests.ps1`) is also available for Windows environments;
+it performs the same sequence with proper error handling.
+
 ### CI behavior
 
 The CI workflow runs the following sequence:
@@ -99,7 +102,9 @@ The CI workflow runs the following sequence:
 This repository uses the pre-commit framework (configured via `prek.toml`) to manage local git hooks. The hooks run automatically on `git commit` and `git push` to catch issues early and auto-fix formatting:
 
 - **pre-commit stage** (on `git commit`): runs `cargo fmt` (formats code), `cargo check`, `cargo clippy`, and `rumdl fmt` (formats markdown)
-- **pre-push stage** (on `git push`): runs nextest (via `cargo run --package cargo-bin -- cargo-nextest run --workspace --all-targets --all-features`, auto-installs nextest via binstall on first run)
+- **pre-push stage** (on `git push`): runs two test hooks sequentially:
+  - `test` — nextest (via `cargo run --package cargo-bin -- cargo-nextest run --workspace --all-targets --all-features`, auto-installs via binstall on first run)
+  - `test-docs` — doctests via `cargo test --doc --workspace` (from FeryET/pre-commit-rust)
 
 To install or update hooks locally, run:
 
@@ -111,13 +116,15 @@ You can also run hooks manually:
 
 ```bash
 pre-commit run --all-files          # Run all hooks
-pre-commit run nextest              # Run the nextest hook
+pre-commit run test                # Run the nextest hook
+pre-commit run test-docs            # Run the doctests hook
 ```
 
 To temporarily skip hooks during a commit, use `SKIP`:
 
 ```bash
-SKIP=nextest git commit -m "message"
+SKIP=test git commit -m "message"          # Skip nextest
+SKIP=test-docs git commit -m "message"     # Skip doctests
 ```
 
 ## Known nextest caveats
