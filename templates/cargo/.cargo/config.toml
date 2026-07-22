@@ -8,9 +8,9 @@ bin = ["run", "--package", "cargo-bin", "--"]
 build-all = ["build", "--workspace", "--all-targets", "--all-features"]
 clippy-all = ["clippy", "--workspace", "--all-targets", "--all-features"]
 fmt-check = ["fmt", "--all", "--", "--check"]
-test-all = ["test", "--workspace", "--all-targets", "--all-features"]
+test-all = ["run", "--package", "cargo-bin", "--", "cargo-nextest", "run", "--workspace", "--all-targets", "--all-features"]
 
 # Targeted validation (recommended for most development)
 build-pkg = ["build", "--all-targets", "--all-features", "-p"]
 clippy-pkg = ["clippy", "--all-targets", "--all-features", "-p"]
-test-pkg = ["test", "--all-targets", "--all-features", "-p"]
+test-pkg = ["run", "--package", "cargo-bin", "--", "cargo-nextest", "run", "--all-targets", "--all-features", "-p"]
