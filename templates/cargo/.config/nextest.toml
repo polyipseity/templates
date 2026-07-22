@@ -1,0 +1,8 @@
+[profile.default]
+slow-timeout = { period = "10s", terminate-after = "60s" }
+leak-timeout = "100ms"
+
+[profile.ci]
+fail-fast = false
+retries = 2
+slow-timeout = { period = "15s", terminate-after = "120s" }
