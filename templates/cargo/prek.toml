@@ -66,8 +66,8 @@ hooks = [{ id = "rumdl-fmt" }]
 # with standard pre-commit ecosystem while maintaining consistent cargo checks
 # between local development and CI.
 #
-# - pre-commit stage: lightweight checks and auto-fixes (fmt, clippy, check) for development velocity
-# - pre-push stage: comprehensive test suite before pushing upstream
+# - pre-commit stage: lightweight checks and auto-fixes (fmt) for development velocity
+# - pre-push stage: comprehensive checks before pushing upstream (cargo-check, clippy, test-docs)
 [[repos]]
 repo = "https://github.com/FeryET/pre-commit-rust.git"
 rev = "2b764ff13b37a64a57232a99363e6438e8877c5c"
@@ -93,6 +93,11 @@ hooks = [
   ], stages = [
     "pre-push",
   ] },
+  # test-docs: run doctests only via cargo test (nextest doesn't support doctests).
+  # Named distinctively so it can be skipped independently: SKIP=test-docs
+  { id = "test", name = "test-docs", args = ["--doc", "--workspace"], pass_filenames = false, stages = [
+    "pre-push",
+  ] },
 ]
 
 # Nextest: Rust test runner with parallel execution, retries, and better UX.
@@ -101,7 +106,7 @@ hooks = [
 [[repos]]
 repo = "local"
 hooks = [
-  { id = "nextest", name = "nextest", entry = "cargo run --package cargo-bin -- cargo-nextest run --workspace --all-targets --all-features", language = "system", pass_filenames = false, stages = [
+  { id = "test", entry = "cargo run --package cargo-bin -- cargo-nextest run --workspace --all-targets --all-features", language = "system", pass_filenames = false, stages = [
     "pre-push",
   ] },
 ]
