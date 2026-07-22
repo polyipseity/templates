@@ -95,7 +95,7 @@ hooks = [
   ] },
   # test-docs: run doctests only via cargo test (nextest doesn't support doctests).
   # Named distinctively so it can be skipped independently: SKIP=test-docs
-  { id = "test", name = "test-docs", args = ["--doc", "--workspace"], pass_filenames = false, stages = [
+  { id = "test", name = "test docs", args = ["--doc", "--workspace"], pass_filenames = false, stages = [
     "pre-push",
   ] },
 ]
@@ -110,4 +110,3 @@ hooks = [
     "pre-push",
   ] },
 ]
-
