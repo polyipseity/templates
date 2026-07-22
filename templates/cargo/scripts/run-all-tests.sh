@@ -3,5 +3,5 @@ set -euo pipefail
 
 cd "$(git rev-parse --show-toplevel)"
 
-cargo test-all
-cargo test --doc --workspace
+cargo --locked test-all
+cargo --locked test --doc --workspace
