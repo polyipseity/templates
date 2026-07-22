@@ -38,11 +38,11 @@ The `.cargo/config.toml` defines cargo aliases to standardize validation command
 
 ### Package-targeted aliases (recommended for development)
 
-| Alias        | Command                                                                                    | Purpose                                                                  |
-| ------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
-| `build-pkg`  | `build -p <pkg> --all-targets --all-features`                                              | Fast per-package build                                                   |
-| `clippy-pkg` | `clippy -p <pkg> --all-targets --all-features`                                             | Fast per-package lint; lint levels are set in `Cargo.toml` via `[lints]` |
-| `test-pkg`   | `run --package cargo-bin -- cargo-nextest run --all-targets --all-features -p`             | Fast per-package tests via nextest (auto-installs via binstall)          |
+| Alias        | Command                                                                        | Purpose                                                                  |
+| ------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| `build-pkg`  | `build -p <pkg> --all-targets --all-features`                                  | Fast per-package build                                                   |
+| `clippy-pkg` | `clippy -p <pkg> --all-targets --all-features`                                 | Fast per-package lint; lint levels are set in `Cargo.toml` via `[lints]` |
+| `test-pkg`   | `run --package cargo-bin -- cargo-nextest run --all-targets --all-features -p` | Fast per-package tests via nextest (auto-installs via binstall)          |
 
 ### Special alias
 
@@ -132,13 +132,9 @@ SKIP=test-docs git commit -m "message"     # Skip doctests
 cargo-nextest has several behavioral differences from `cargo test`. Be aware of these when using nextest in this template:
 
 1. **No doctest support.** Nextest does not run doctests. This is why `scripts/run-all-tests.sh` runs `cargo test --doc --workspace` separately after nextest.
-
 2. **Binary/test executable detection only.** Nextest only discovers binary and test crate targets. It does not run examples or benchmarks. Use `cargo build --examples` or `cargo bench` separately for those.
-
 3. **`#[should_panic]` tests may timeout.** Nextest has a default per-test timeout. A `#[should_panic]` test that panics via an infinite loop or deadlock will eventually be killed by the timeout rather than hanging indefinitely. This is usually desirable, but adjust `slow-timeout` in `.config/nextest.toml` if needed.
-
 4. **Leak detection is experimental.** Nextest's leak detection (configured via `leak-timeout` in `.config/nextest.toml`) can produce false positives for tests that hold OS resources (file descriptors, sockets). Disable it globally or per-test if it causes CI flakiness.
-
 5. **No `--nocapture` by default.** Nextest captures stdout/stderr per test and displays it grouped by pass/fail. To see live output, use `cargo nextest run --show-output`. The cargo alias `test-all` does not pass `--show-output`; use `cargo bin cargo-nextest run --show-output` for debugging.
 
 ## When configs are incomplete
