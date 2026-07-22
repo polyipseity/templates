@@ -106,7 +106,7 @@ hooks = [
 [[repos]]
 repo = "local"
 hooks = [
-  { id = "test", entry = "cargo run --package cargo-bin -- cargo-nextest run --workspace --all-targets --all-features", language = "system", pass_filenames = false, stages = [
+  { id = "test", name = "test", entry = "cargo run --package cargo-bin -- cargo-nextest run --workspace --all-targets --all-features", language = "system", pass_filenames = false, stages = [
     "pre-push",
   ] },
 ]
