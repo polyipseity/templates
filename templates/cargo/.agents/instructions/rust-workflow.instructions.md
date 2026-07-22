@@ -1,7 +1,7 @@
 ---
 description: "Use when editing Rust source, Cargo config, Rust CI validation, or Rust scripts in this repository."
 name: "Rust Workflow Guidance"
-applyTo: "**/*.rs, Cargo.toml, Cargo.lock, rust-toolchain.toml, rustfmt.toml, clippy.toml, .cargo/**/*.toml, .github/workflows/**/*.yml, .github/workflows/**/*.yaml, scripts/**/*.sh, scripts/**/*.ps1, scripts/**/*.bat"
+applyTo: "**/*.rs, Cargo.toml, Cargo.lock, rust-toolchain.toml, rustfmt.toml, clippy.toml, .config/**/*.toml, .cargo/**/*.toml, .github/workflows/**/*.yml, .github/workflows/**/*.yaml, scripts/**/*.sh, scripts/**/*.ps1, scripts/**/*.bat"
 ---
 
 # Rust Workflow Guidance
@@ -16,6 +16,7 @@ applyTo: "**/*.rs, Cargo.toml, Cargo.lock, rust-toolchain.toml, rustfmt.toml, cl
 
 - `Cargo.toml` for workspace structure, package identity, and dependency graph.
 - `.cargo/config.toml` for local cargo behavior, target directory, and aliases.
+- `.config/nextest.toml` for nextest runner configuration (profiles, timeouts, retries).
 - `rust-toolchain.toml` for toolchain channel, profile, and components.
 - `rustfmt.toml` and `clippy.toml` for style and lint policy.
 - `.github/workflows/ci.yml` for canonical CI validation behavior.
@@ -33,7 +34,7 @@ The `.cargo/config.toml` defines cargo aliases to standardize validation command
 | `build-all`  | `build --workspace --all-targets --all-features`  | Full workspace build including tests/docs                                        |
 | `clippy-all` | `clippy --workspace --all-targets --all-features` | Workspace-wide lint; lint levels are set in `Cargo.toml` via `[workspace.lints]` |
 | `fmt-check`  | `fmt --all -- --check`                            | Workspace-wide formatting check                                                  |
-| `test-all`   | `test --workspace --all-targets --all-features`   | Workspace-wide test suite                                                        |
+| `test-all`   | `run --package cargo-bin -- cargo-nextest run --workspace --all-targets --all-features` | Workspace-wide test suite via nextest (auto-installs via binstall)               |
 
 ### Package-targeted aliases (recommended for development)
 
@@ -41,7 +42,7 @@ The `.cargo/config.toml` defines cargo aliases to standardize validation command
 | ------------ | ---------------------------------------------- | ------------------------------------------------------------------------ |
 | `build-pkg`  | `build -p <pkg> --all-targets --all-features`  | Fast per-package build                                                   |
 | `clippy-pkg` | `clippy -p <pkg> --all-targets --all-features` | Fast per-package lint; lint levels are set in `Cargo.toml` via `[lints]` |
-| `test-pkg`   | `test -p <pkg> --all-targets --all-features`   | Fast per-package tests                                                   |
+| `test-pkg`   | `run --package cargo-bin -- cargo-nextest run --all-targets --all-features -p` | Fast per-package tests via nextest (auto-installs via binstall)          |
 
 ### Special alias
 
@@ -63,19 +64,31 @@ cargo test-pkg -p <package-name>
 
 ### Before commit/push
 
-Use workspace-wide aliases for comprehensive validation:
+Use the canonical full test script or workspace-wide aliases:
 
 ```bash
+scripts/run-all-tests.sh      # nextest + doctests
+# or individually:
 cargo fmt-check
-cargo test-all
+cargo test-all                # nextest only (no doctests)
 cargo clippy-all
 ```
+
+### Full test suite (nextest + doctests)
+
+The canonical way to run the complete test suite (nextest for integration/unit tests + doctests) is:
+
+```bash
+scripts/run-all-tests.sh
+```
+
+The script runs `cargo test-all` (nextest) then `cargo test --doc --workspace` (doctests, which nextest does not cover). Both invocations use `--locked` for reproducible dependency resolution. CI uses this same script.
 
 ### CI behavior
 
 The CI workflow runs the following sequence:
 
-1. `cargo test-all` — run full test suite
+1. `scripts/run-all-tests.sh` — nextest test suite + doctests (auto-installs nextest via cargo-binstall on first run)
 2. `cargo bin rumdl check` — check `rumdl` linter (workspace member)
 3. `cargo clippy-all` — workspace-wide clippy with deny-warnings
 4. `cargo fmt-check` — formatting verification
@@ -86,7 +99,7 @@ The CI workflow runs the following sequence:
 This repository uses the pre-commit framework (configured via `prek.toml`) to manage local git hooks. The hooks run automatically on `git commit` and `git push` to catch issues early and auto-fix formatting:
 
 - **pre-commit stage** (on `git commit`): runs `cargo fmt` (formats code), `cargo check`, `cargo clippy`, and `rumdl fmt` (formats markdown)
-- **pre-push stage** (on `git push`): runs `cargo test --all`
+- **pre-push stage** (on `git push`): runs nextest (via `cargo run --package cargo-bin -- cargo-nextest run --workspace --all-targets --all-features`, auto-installs nextest via binstall on first run)
 
 To install or update hooks locally, run:
 
@@ -98,14 +111,28 @@ You can also run hooks manually:
 
 ```bash
 pre-commit run --all-files          # Run all hooks
-pre-commit run cargo-fmt            # Run a specific hook
+pre-commit run nextest              # Run the nextest hook
 ```
 
 To temporarily skip hooks during a commit, use `SKIP`:
 
 ```bash
-SKIP=cargo-test git commit -m "message"
+SKIP=nextest git commit -m "message"
 ```
+
+## Known nextest caveats
+
+cargo-nextest has several behavioral differences from `cargo test`. Be aware of these when using nextest in this template:
+
+1. **No doctest support.** Nextest does not run doctests. This is why `scripts/run-all-tests.sh` runs `cargo test --doc --workspace` separately after nextest.
+
+2. **Binary/test executable detection only.** Nextest only discovers binary and test crate targets. It does not run examples or benchmarks. Use `cargo build --examples` or `cargo bench` separately for those.
+
+3. **`#[should_panic]` tests may timeout.** Nextest has a default per-test timeout. A `#[should_panic]` test that panics via an infinite loop or deadlock will eventually be killed by the timeout rather than hanging indefinitely. This is usually desirable, but adjust `slow-timeout` in `.config/nextest.toml` if needed.
+
+4. **Leak detection is experimental.** Nextest's leak detection (configured via `leak-timeout` in `.config/nextest.toml`) can produce false positives for tests that hold OS resources (file descriptors, sockets). Disable it globally or per-test if it causes CI flakiness.
+
+5. **No `--nocapture` by default.** Nextest captures stdout/stderr per test and displays it grouped by pass/fail. To see live output, use `cargo nextest run --show-output`. The cargo alias `test-all` does not pass `--show-output`; use `cargo bin cargo-nextest run --show-output` for debugging.
 
 ## When configs are incomplete
 
