@@ -93,14 +93,16 @@ hooks = [
   ], stages = [
     "pre-push",
   ] },
-  # test: upstream sets pass_filenames: true, but cargo test treats trailing
-  # arguments as test-name filter strings, not file paths. Passing filenames
-  # would silently run zero tests for most changes. Keep pass_filenames = false.
-  { id = "test", args = [
-    "--workspace",
-    "--all-targets",
-    "--all-features",
-  ], pass_filenames = false, stages = [
+]
+
+# Nextest: Rust test runner with parallel execution, retries, and better UX.
+# Replaces pre-commit-rust's `test` hook. Routes through cargo-run-bin to
+# auto-install via cargo-binstall on first run.
+[[repos]]
+repo = "local"
+hooks = [
+  { id = "nextest", name = "nextest", entry = "cargo run --package cargo-bin -- cargo-nextest run --workspace --all-targets --all-features", language = "system", pass_filenames = false, stages = [
     "pre-push",
   ] },
 ]
+
