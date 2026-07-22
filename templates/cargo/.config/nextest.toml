@@ -1,7 +1,42 @@
+# ── cargo-nextest project config ──────────────────────────────────
+#
+# ── Known limitations ─────────────────────────────────────────────
+#
+# nextest deliberately skips doctests (/// examples).
+# Fix: run `cargo test --doc` alongside `cargo nextest run`.
+#
+# Custom test harnesses (harness = false in Cargo.toml) are incompatible.
+# nextest requires --list/--exact CLI flags that custom harnesses do not
+# implement unless they use a compat library like libtest-mimic.
+# Fix: run `cargo test` for harness = false crates, or migrate to libtest-mimic.
+#
+# Code coverage: use `cargo llvm-cov nextest`.
+# Install cargo-llvm-cov via `cargo install cargo-llvm-cov`.
+# See https://nexte.st/docs/integrations/test-coverage/ for CI integration.
+#
+# IDE test runner: editors default to `cargo test`.  Configure:
+# - VS Code: use rust-analyzer.runnables.test.overrideCommand
+# - RustRover: Settings -> Build Tools -> Cargo -> Test Runner -> cargo-nextest
+# - Zed: add "nextest": true to project .zed/settings.json
+#
+# See nextest docs for details: https://nexte.st/
+
+# ── UI/UX ──────────────────────────────────────────────────────────────
+[ui]
+show-progress = "bar"
+max-progress-running = 4
+
+# ── Default profile (local dev) ────────────────────────────────────────
+# Per-test timeout: kill a test that runs >60s with no output.
+# Leak detection: warn if a test doesn't clean up child processes within 100ms.
 [profile.default]
 slow-timeout = { period = "10s", terminate-after = "60s" }
 leak-timeout = "100ms"
 
+# ── CI profile (more conservative) ─────────────────────────────────────
+# Don't fail fast — collect all failures in one run.
+# Retry flaky tests up to twice before reporting failure.
+# More generous timeout (2min) to account for CI resource contention.
 [profile.ci]
 fail-fast = false
 retries = 2
